@@ -190,8 +190,8 @@ window.WorkoutCopy = {
       "privacyTitle": "Your data stays in this tab",
       "privacyIntro": "WorkoutPlanMaker calculates on your device. There is no account, form submission, server-side health profile or email collection.",
       "privacyProcessing": "Body details and answers are held in memory while the page is open. This site does not write them to cookies, local storage or a database. Reloading or leaving the page clears the site’s in-memory assessment. Your browser controls its own history, cache and print files.",
-      "privacyAnalyticsTitle": "Google Analytics and local calculations",
-      "privacyAnalytics": "This version uses Google Analytics for visits and interactions. Body details and results are calculated locally and are not included in custom events. Google may process standard browser and page data; see its privacy terms.",
+      "privacyAnalyticsTitle": "Analytics and local calculations",
+      "privacyAnalytics": "This version uses Google Analytics for visits and interactions. Body details and results are calculated locally and are not included in custom events. Google may process standard browser and page data; see its privacy terms. Microsoft Clarity also records page interaction (clicks and scrolling) to help improve the site; it does not receive body details or results.",
       "privacyPrintTitle": "Printing and downloaded files",
       "privacyPrint": "Print / Save PDF opens the browser’s own print dialog. Your device handles that file; the site does not receive a copy. Remember that a saved PDF contains your results.",
       "privacyContactTitle": "Contact",
@@ -208,7 +208,7 @@ window.WorkoutCopy = {
       "minorProgressNote": "Practise first, repeat weeks when useful, and get qualified supervision before increasing resistance. Progress is not a weekly requirement.",
       "clearMeasures": "Clear optional measurements",
       "adultScope": "Calorie and macro estimates are intended for adults aged 18–80.",
-      "analyticsEnabledTitle": "Google Analytics and local calculations",
+      "analyticsEnabledTitle": "Analytics and local calculations",
       "analyticsEnabled": "This version uses Google Analytics for visits and interactions. Body details and results are calculated locally and are not included in custom events. Google may process standard browser and page data; see its privacy terms.",
       "week": "Week {n}"
     },
@@ -285,7 +285,7 @@ window.WorkoutCopy = {
       "file": "privacy-policy.html",
       "en": {
         "title": "Privacy Policy | WorkoutPlanMaker",
-        "description": "How WorkoutPlanMaker processes fitness inputs locally, handles print files and uses Google Analytics for visits without sending body details.",
+        "description": "How WorkoutPlanMaker processes fitness inputs locally, handles print files and uses Google Analytics and Microsoft Clarity for visits without sending body details.",
         "heading": "Privacy Policy",
         "intro": "WorkoutPlanMaker calculates on your device. There is no account, form submission, server-side health profile or email collection.",
         "faq": []
