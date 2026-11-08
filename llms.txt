@@ -1,0 +1,7 @@
+# WorkoutPlanMaker
+
+Free browser-based adult workout templates and macro estimates. No account. Inputs stay in the current tab. Not medical advice.
+
+- [Get Your Personalized Workout Plan](https://yyu447672-tech.github.io/workoutplanmaker/): Build a free personalized workout plan, calorie estimate and daily macros from 8 questions. No signup. Your answers stay in your browser.
+- [Macro Calculator](https://yyu447672-tech.github.io/workoutplanmaker/macro-calculator.html): Calculate daily protein, fat and carbs for free. Enter a calorie target or estimate energy needs. All calculations stay in your browser.
+- [Privacy Policy](https://yyu447672-tech.github.io/workoutplanmaker/privacy-policy.html): How WorkoutPlanMaker processes fitness inputs locally, handles print files and uses Google Analytics for visits without sending body details.
