@@ -195,7 +195,7 @@ window.WorkoutCopy = {
       "privacyPrintTitle": "Printing and downloaded files",
       "privacyPrint": "Print / Save PDF opens the browser’s own print dialog. Your device handles that file; the site does not receive a copy. Remember that a saved PDF contains your results.",
       "privacyContactTitle": "Contact",
-      "privacyContact": "Contact address to be configured before launch: contact@example.com",
+      "privacyContact": "Contact us at yyu447672@gmail.com.",
       "privacyDisclaimerTitle": "Use these estimates with care",
       "privacyDisclaimer": "This tool is for general adult fitness information, not diagnosis, treatment or a validated individual prescription. It is not designed for pregnancy, breastfeeding, eating disorders, recovery from illness or injury, or other needs requiring individual care.",
       "privacyBack": "Return to your assessment",
