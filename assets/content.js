@@ -291,6 +291,556 @@ window.WorkoutCopy = {
         "faq": []
       },
       "zh": {}
+    },
+    "tdee": {
+      "file": "tdee-calculator.html",
+      "en": {
+        "title": "TDEE Calculator - Find Your Daily Calories Free",
+        "description": "Calculate TDEE and BMR free with Mifflin-St Jeor, Harris-Benedict and Katch-McArdle. No sign-up; your fitness inputs stay in your browser.",
+        "heading": "TDEE Calculator",
+        "intro": "Compare three energy equations using your body details and activity. Change an input to update the estimates.",
+        "navLabel": "TDEE Calculator",
+        "ui": {
+          "navOpen": "Menu",
+          "navClose": "Close",
+          "navNavigation": "Main navigation",
+          "relatedTools": "Related tools",
+          "centimetres": "Centimetres",
+          "feetAndInches": "Feet and inches",
+          "kilograms": "Kilograms",
+          "pounds": "Pounds",
+          "age": "Age",
+          "sex": "Sex used by the equation",
+          "male": "Male",
+          "female": "Female",
+          "height": "Height",
+          "heightUnits": "Height units",
+          "cm": "cm",
+          "feet": "ft",
+          "inches": "in",
+          "weight": "Weight",
+          "weightUnits": "Weight units",
+          "kg": "kg",
+          "lb": "lb",
+          "activity": "Activity level",
+          "sedentary": "sedentary",
+          "light": "light",
+          "moderate": "moderate",
+          "high": "high",
+          "bodyFat": "Body fat (optional)",
+          "bodyFatHelp": "Enter 5–50%, or leave blank. Katch–McArdle needs this estimate.",
+          "ageHelp": "Enter a whole number from 16 to 80. Energy estimates are for adults.",
+          "heightHelp": "Height range: 120–230 cm, or the equivalent in feet and inches.",
+          "weightHelp": "Weight range: 30–250 kg, or the equivalent in pounds.",
+          "reset": "Reset calculator",
+          "resultTitle": "Your daily energy estimates",
+          "defaultsNote": "Example inputs are editable starting values, not a personal recommendation.",
+          "scopeNote": "For adult estimates only. Children and teens need age-appropriate professional guidance.",
+          "dailyEnergyHelp": "Enter a positive value up to 20,000 kcal/day. This arithmetic range is not a recommendation.",
+          "lossHelp": "Choose 0.5–50 kg. This range is a calculator limit, not a recommended goal.",
+          "formula": "Formula",
+          "bmr": "BMR",
+          "tdee": "TDEE",
+          "kcal": "kcal/day",
+          "mifflin": "Mifflin–St Jeor",
+          "harris": "Revised Harris–Benedict",
+          "katch": "Katch–McArdle",
+          "locked": "Enter body fat % to unlock",
+          "bmi": "BMI",
+          "bmiCategory": "Adult category",
+          "underweight": "Underweight",
+          "healthy": "Healthy",
+          "overweight": "Overweight",
+          "obese": "Obese",
+          "weightRange": "Healthy adult weight range",
+          "rangeNote": "This range uses BMI 18.5–24.9. It is a screening reference, not an individual target.",
+          "roundingNote": "Categories use the unrounded BMI; the displayed value is rounded to one decimal.",
+          "directMode": "Enter my TDEE",
+          "estimateMode": "Calculate from my data",
+          "modeLabel": "How do you want to enter TDEE?",
+          "dailyEnergy": "Daily energy (TDEE)",
+          "targetLoss": "Weight-loss goal (kg)",
+          "pace": "Weekly pace",
+          "pace025": "0.25 kg/week",
+          "pace050": "0.5 kg/week",
+          "pace075": "0.75 kg/week",
+          "pace100": "1.0 kg/week",
+          "deficit": "Daily calorie deficit",
+          "intake": "Daily intake estimate",
+          "estimatedDate": "Estimated model date",
+          "days": "days",
+          "weeks": "weeks",
+          "linearNote": "The date assumes a constant deficit. Actual weight change varies, and energy needs change as weight changes.",
+          "warningThreshold": "This target is below the safe minimum (1,200 kcal for women / 1,500 kcal for men). Slow down or raise your TDEE.",
+          "warningQualification": "These are general warning thresholds, not proof that a target above them is suitable for you.",
+          "nonPositive": "These inputs produce a non-positive calorie target. It is not an actionable intake plan; check your TDEE or lower the pace.",
+          "underweightWarning": "This tool is not intended for weight-loss planning in the underweight range. Seek individual professional guidance.",
+          "tableScroll": "Swipe horizontally to see every column.",
+          "interpretTdee": "Your body burns about {tdee} calories a day at a {activity} activity level.",
+          "interpretBmi": "Your BMI is {bmi}, in the {category} range.",
+          "interpretDeficit": "The model estimates {intake} calories a day for {loss} kg over about {weeks} weeks.",
+          "dateLead": "Estimated model date: {date} (in about {weeks} weeks).",
+          "error": {
+            "missing": "Complete the required fields to see your estimate.",
+            "age": "Enter a whole age from 16 to 80.",
+            "height": "Enter a valid height from 120 to 230 cm, or its equivalent.",
+            "weight": "Enter a valid weight from 30 to 250 kg, or its equivalent.",
+            "sex": "Choose the male or female equation coefficient.",
+            "activity": "Choose one of the four activity levels.",
+            "bodyfat": "Enter body fat from 5 to 50%, or leave it blank.",
+            "tdee": "Enter a positive TDEE of no more than 20,000 kcal for this calculation.",
+            "loss": "Enter a weight-loss goal from 0.5 to 50 kg.",
+            "pace": "Choose a weekly pace of 0.25, 0.5, 0.75 or 1.0 kg.",
+            "date": "Check the goal and pace; this date cannot be calculated."
+          }
+        },
+        "formulaTitle": "How the energy equations work",
+        "formulaIntro": "Weight is in kilograms, height in centimetres and age in years. TDEE uses your chosen activity multiplier. Each equation estimates resting energy; none measures your metabolism.",
+        "formulas": [
+          [
+            "Mifflin–St Jeor · 1990",
+            "Mifflin and colleagues studied healthy adults. This is the main estimate shown here.",
+            "Male: 10×kg + 6.25×cm − 5×age + 5. Female: 10×kg + 6.25×cm − 5×age − 161."
+          ],
+          [
+            "Revised Harris–Benedict · 1984",
+            "Roza and Shizgal re-evaluated adult data from Harris and Benedict.",
+            "Male: 88.362 + 13.397×kg + 4.799×cm − 5.677×age. Female: 447.593 + 9.247×kg + 3.098×cm − 4.330×age."
+          ],
+          [
+            "Katch–McArdle · textbook reference, 1996",
+            "McArdle and the Katches describe lean-mass-based estimation. An uncertain body-fat input changes this estimate.",
+            "Lean mass = kg × (1 − body fat % ÷ 100). BMR = 370 + 21.6 × lean mass."
+          ]
+        ],
+        "formulaNote": "TDEE = unrounded BMR × 1.2 / 1.375 / 1.55 / 1.725. A difference of a few hundred calories is possible; Mifflin is a starting estimate, not a guaranteed individual requirement.",
+        "faq": [
+          [
+            "What is TDEE?",
+            "TDEE is total daily energy expenditure: resting energy plus movement, exercise and digestion."
+          ],
+          [
+            "Which formula is most accurate?",
+            "None is exact for everyone. Mifflin is a common adult starting point; measured needs can differ."
+          ],
+          [
+            "Why do the three formulas give different numbers?",
+            "They use different data and assumptions. Katch–McArdle also depends on your body-fat estimate."
+          ],
+          [
+            "How often should I recalculate my TDEE?",
+            "Recalculate when weight or activity changes. Review actual progress before adjusting a calorie plan."
+          ],
+          [
+            "Who builds WorkoutPlanMaker, and where do the formulas come from?",
+            "WorkoutPlanMaker is built by an independent maker, not a clinic. Calculations use published formulas (Mifflin-St Jeor 1990 for BMR, U.S. Navy method for body fat, WHO ranges for BMI). Results are estimates for general information only, not medical advice. Talk to a healthcare professional before starting a new diet or exercise program."
+          ]
+        ],
+        "sources": [
+          [
+            "Mifflin study",
+            "https://pubmed.ncbi.nlm.nih.gov/2305711/"
+          ],
+          [
+            "Roza–Shizgal study",
+            "https://pubmed.ncbi.nlm.nih.gov/6741850/"
+          ],
+          [
+            "Textbook edition",
+            "https://public.websites.umich.edu/~vkass/book/BigMac4th/orders.4thed.html"
+          ]
+        ],
+        "links": [
+          [
+            "Turn your TDEE into macros →",
+            "macro-calculator.html"
+          ],
+          [
+            "Plan a calorie deficit →",
+            "calorie-deficit-calculator.html"
+          ],
+          [
+            "Check your BMI →",
+            "bmi-calculator.html"
+          ],
+          [
+            "← Back to assessment",
+            "index.html"
+          ]
+        ],
+        "resultSource": "Based on the Mifflin-St Jeor equation (1990): BMR × activity factor (1.2–1.725).",
+        "faqTitle": "Calculator questions",
+        "nextToolsTitle": "Continue with your numbers"
+      },
+      "zh": {}
+    },
+    "bmi": {
+      "file": "bmi-calculator.html",
+      "en": {
+        "title": "BMI Calculator - Check Your Body Mass Index Free",
+        "description": "Check your BMI free: enter height and weight to get your BMI, category and healthy weight range. No sign-up, instant result in your browser.",
+        "heading": "BMI Calculator",
+        "intro": "Enter height and weight to see your adult BMI category and a reference weight range. Your inputs stay in this browser.",
+        "navLabel": "BMI Calculator",
+        "ui": {
+          "navOpen": "Menu",
+          "navClose": "Close",
+          "navNavigation": "Main navigation",
+          "relatedTools": "Related tools",
+          "centimetres": "Centimetres",
+          "feetAndInches": "Feet and inches",
+          "kilograms": "Kilograms",
+          "pounds": "Pounds",
+          "age": "Age",
+          "sex": "Sex used by the equation",
+          "male": "Male",
+          "female": "Female",
+          "height": "Height",
+          "heightUnits": "Height units",
+          "cm": "cm",
+          "feet": "ft",
+          "inches": "in",
+          "weight": "Weight",
+          "weightUnits": "Weight units",
+          "kg": "kg",
+          "lb": "lb",
+          "activity": "Activity level",
+          "sedentary": "sedentary",
+          "light": "light",
+          "moderate": "moderate",
+          "high": "high",
+          "bodyFat": "Body fat (optional)",
+          "bodyFatHelp": "Enter 5–50%, or leave blank. Katch–McArdle needs this estimate.",
+          "ageHelp": "Enter a whole number from 16 to 80. Energy estimates are for adults.",
+          "heightHelp": "Height range: 120–230 cm, or the equivalent in feet and inches.",
+          "weightHelp": "Weight range: 30–250 kg, or the equivalent in pounds.",
+          "reset": "Reset calculator",
+          "resultTitle": "Your adult BMI estimate",
+          "defaultsNote": "Example inputs are editable starting values, not a personal recommendation.",
+          "scopeNote": "For adult estimates only. Children and teens need age-appropriate professional guidance.",
+          "dailyEnergyHelp": "Enter a positive value up to 20,000 kcal/day. This arithmetic range is not a recommendation.",
+          "lossHelp": "Choose 0.5–50 kg. This range is a calculator limit, not a recommended goal.",
+          "formula": "Formula",
+          "bmr": "BMR",
+          "tdee": "TDEE",
+          "kcal": "kcal/day",
+          "mifflin": "Mifflin–St Jeor",
+          "harris": "Revised Harris–Benedict",
+          "katch": "Katch–McArdle",
+          "locked": "Enter body fat % to unlock",
+          "bmi": "BMI",
+          "bmiCategory": "Adult category",
+          "underweight": "Underweight",
+          "healthy": "Healthy",
+          "overweight": "Overweight",
+          "obese": "Obese",
+          "weightRange": "Healthy adult weight range",
+          "rangeNote": "This range uses BMI 18.5–24.9. It is a screening reference, not an individual target.",
+          "roundingNote": "Categories use the unrounded BMI; the displayed value is rounded to one decimal.",
+          "directMode": "Enter my TDEE",
+          "estimateMode": "Calculate from my data",
+          "modeLabel": "How do you want to enter TDEE?",
+          "dailyEnergy": "Daily energy (TDEE)",
+          "targetLoss": "Weight-loss goal (kg)",
+          "pace": "Weekly pace",
+          "pace025": "0.25 kg/week",
+          "pace050": "0.5 kg/week",
+          "pace075": "0.75 kg/week",
+          "pace100": "1.0 kg/week",
+          "deficit": "Daily calorie deficit",
+          "intake": "Daily intake estimate",
+          "estimatedDate": "Estimated model date",
+          "days": "days",
+          "weeks": "weeks",
+          "linearNote": "The date assumes a constant deficit. Actual weight change varies, and energy needs change as weight changes.",
+          "warningThreshold": "This target is below the safe minimum (1,200 kcal for women / 1,500 kcal for men). Slow down or raise your TDEE.",
+          "warningQualification": "These are general warning thresholds, not proof that a target above them is suitable for you.",
+          "nonPositive": "These inputs produce a non-positive calorie target. It is not an actionable intake plan; check your TDEE or lower the pace.",
+          "underweightWarning": "This tool is not intended for weight-loss planning in the underweight range. Seek individual professional guidance.",
+          "tableScroll": "Swipe horizontally to see every column.",
+          "interpretTdee": "Your body burns about {tdee} calories a day at a {activity} activity level.",
+          "interpretBmi": "Your BMI is {bmi}, in the {category} range.",
+          "interpretDeficit": "The model estimates {intake} calories a day for {loss} kg over about {weeks} weeks.",
+          "dateLead": "Estimated model date: {date} (in about {weeks} weeks).",
+          "error": {
+            "missing": "Complete the required fields to see your estimate.",
+            "age": "Enter a whole age from 16 to 80.",
+            "height": "Enter a valid height from 120 to 230 cm, or its equivalent.",
+            "weight": "Enter a valid weight from 30 to 250 kg, or its equivalent.",
+            "sex": "Choose the male or female equation coefficient.",
+            "activity": "Choose one of the four activity levels.",
+            "bodyfat": "Enter body fat from 5 to 50%, or leave it blank.",
+            "tdee": "Enter a positive TDEE of no more than 20,000 kcal for this calculation.",
+            "loss": "Enter a weight-loss goal from 0.5 to 50 kg.",
+            "pace": "Choose a weekly pace of 0.25, 0.5, 0.75 or 1.0 kg.",
+            "date": "Check the goal and pace; this date cannot be calculated."
+          }
+        },
+        "formulaTitle": "What the BMI number means",
+        "formulaIntro": "BMI divides weight in kilograms by height in metres squared. WHO categories describe adult screening ranges; they do not diagnose health.",
+        "formulas": [
+          [
+            "Body mass index",
+            "Use unrounded BMI for the category.",
+            "BMI = kg ÷ (height in metres)²."
+          ],
+          [
+            "Reference weight range",
+            "Use the same height to calculate both ends.",
+            "18.5 × height² to 24.9 × height², in kilograms."
+          ]
+        ],
+        "formulaNote": "BMI does not distinguish muscle from fat; athletes may score high without excess fat. Children and teens need age- and sex-specific assessment.",
+        "categories": [
+          [
+            "Underweight",
+            "Below 18.5"
+          ],
+          [
+            "Healthy",
+            "18.5 to below 25"
+          ],
+          [
+            "Overweight",
+            "25 to below 30"
+          ],
+          [
+            "Obese",
+            "30 or above"
+          ]
+        ],
+        "faq": [
+          [
+            "What is a healthy BMI?",
+            "The adult reference range is 18.5 to below 25. Individual health also depends on other factors."
+          ],
+          [
+            "Is BMI accurate for muscular people?",
+            "It can overestimate fatness. BMI measures weight relative to height, not body composition."
+          ],
+          [
+            "BMI vs body fat percentage — which matters more?",
+            "Neither gives the whole picture. Both are estimates with different limitations."
+          ],
+          [
+            "What is my healthy weight range?",
+            "This calculator uses BMI 18.5–24.9 at your height. It is not a personalised weight target."
+          ],
+          [
+            "Who builds WorkoutPlanMaker, and where do the formulas come from?",
+            "WorkoutPlanMaker is built by an independent maker, not a clinic. Calculations use published formulas (Mifflin-St Jeor 1990 for BMR, U.S. Navy method for body fat, WHO ranges for BMI). Results are estimates for general information only, not medical advice. Talk to a healthcare professional before starting a new diet or exercise program."
+          ]
+        ],
+        "sources": [
+          [
+            "WHO adult categories",
+            "https://www.who.int/data/nutrition/nlis/info/malnutrition-in-women"
+          ]
+        ],
+        "links": [
+          [
+            "Find your TDEE →",
+            "tdee-calculator.html"
+          ],
+          [
+            "Plan a calorie deficit →",
+            "calorie-deficit-calculator.html"
+          ],
+          [
+            "Set your macros →",
+            "macro-calculator.html"
+          ],
+          [
+            "← Back to assessment",
+            "index.html"
+          ]
+        ],
+        "resultSource": "BMI = weight (kg) ÷ height (m)². Ranges follow WHO classifications.",
+        "faqTitle": "Calculator questions",
+        "nextToolsTitle": "Continue with your numbers"
+      },
+      "zh": {}
+    },
+    "deficit": {
+      "file": "calorie-deficit-calculator.html",
+      "en": {
+        "title": "Calorie Deficit Calculator - Plan Your Weight Loss",
+        "description": "Plan your calorie deficit free: set your weight-loss goal and pace to get your daily calorie target and target date. No sign-up, instant result.",
+        "heading": "Calorie Deficit Calculator",
+        "intro": "Compare a calorie target and model date from your TDEE, goal and pace. This simple calculation cannot predict individual weight loss.",
+        "navLabel": "Deficit Calculator",
+        "ui": {
+          "navOpen": "Menu",
+          "navClose": "Close",
+          "navNavigation": "Main navigation",
+          "relatedTools": "Related tools",
+          "centimetres": "Centimetres",
+          "feetAndInches": "Feet and inches",
+          "kilograms": "Kilograms",
+          "pounds": "Pounds",
+          "age": "Age",
+          "sex": "Sex used by the equation",
+          "male": "Male",
+          "female": "Female",
+          "height": "Height",
+          "heightUnits": "Height units",
+          "cm": "cm",
+          "feet": "ft",
+          "inches": "in",
+          "weight": "Weight",
+          "weightUnits": "Weight units",
+          "kg": "kg",
+          "lb": "lb",
+          "activity": "Activity level",
+          "sedentary": "sedentary",
+          "light": "light",
+          "moderate": "moderate",
+          "high": "high",
+          "bodyFat": "Body fat (optional)",
+          "bodyFatHelp": "Enter 5–50%, or leave blank. Katch–McArdle needs this estimate.",
+          "ageHelp": "Enter a whole number from 16 to 80. Energy estimates are for adults.",
+          "heightHelp": "Height range: 120–230 cm, or the equivalent in feet and inches.",
+          "weightHelp": "Weight range: 30–250 kg, or the equivalent in pounds.",
+          "reset": "Reset calculator",
+          "resultTitle": "Your deficit model",
+          "defaultsNote": "Example inputs are editable starting values, not a personal recommendation.",
+          "scopeNote": "For adults only. Not intended for pregnancy, nursing, eating disorders or individual medical care.",
+          "dailyEnergyHelp": "Enter a positive value up to 20,000 kcal/day. This arithmetic range is not a recommendation.",
+          "lossHelp": "Choose 0.5–50 kg. This range is a calculator limit, not a recommended goal.",
+          "formula": "Formula",
+          "bmr": "BMR",
+          "tdee": "TDEE",
+          "kcal": "kcal/day",
+          "mifflin": "Mifflin–St Jeor",
+          "harris": "Revised Harris–Benedict",
+          "katch": "Katch–McArdle",
+          "locked": "Enter body fat % to unlock",
+          "bmi": "BMI",
+          "bmiCategory": "Adult category",
+          "underweight": "Underweight",
+          "healthy": "Healthy",
+          "overweight": "Overweight",
+          "obese": "Obese",
+          "weightRange": "Healthy adult weight range",
+          "rangeNote": "This range uses BMI 18.5–24.9. It is a screening reference, not an individual target.",
+          "roundingNote": "Categories use the unrounded BMI; the displayed value is rounded to one decimal.",
+          "directMode": "Enter my TDEE",
+          "estimateMode": "Calculate from my data",
+          "modeLabel": "How do you want to enter TDEE?",
+          "dailyEnergy": "Daily energy (TDEE)",
+          "targetLoss": "Weight-loss goal (kg)",
+          "pace": "Weekly pace",
+          "pace025": "0.25 kg/week",
+          "pace050": "0.5 kg/week",
+          "pace075": "0.75 kg/week",
+          "pace100": "1.0 kg/week",
+          "deficit": "Daily calorie deficit",
+          "intake": "Daily intake estimate",
+          "estimatedDate": "Estimated model date",
+          "days": "days",
+          "weeks": "weeks",
+          "linearNote": "The date assumes a constant deficit. Actual weight change varies, and energy needs change as weight changes.",
+          "warningThreshold": "This target is below the safe minimum (1,200 kcal for women / 1,500 kcal for men). Slow down or raise your TDEE.",
+          "warningQualification": "These are general warning thresholds, not proof that a target above them is suitable for you.",
+          "nonPositive": "These inputs produce a non-positive calorie target. It is not an actionable intake plan; check your TDEE or lower the pace.",
+          "underweightWarning": "This tool is not intended for weight-loss planning in the underweight range. Seek individual professional guidance.",
+          "tableScroll": "Swipe horizontally to see every column.",
+          "interpretTdee": "Your body burns about {tdee} calories a day at a {activity} activity level.",
+          "interpretBmi": "Your BMI is {bmi}, in the {category} range.",
+          "interpretDeficit": "The model estimates {intake} calories a day for {loss} kg over about {weeks} weeks.",
+          "dateLead": "Estimated model date: {date} (in about {weeks} weeks).",
+          "error": {
+            "missing": "Complete the required fields to see your estimate.",
+            "age": "Enter a whole age from 16 to 80.",
+            "height": "Enter a valid height from 120 to 230 cm, or its equivalent.",
+            "weight": "Enter a valid weight from 30 to 250 kg, or its equivalent.",
+            "sex": "Choose the male or female equation coefficient.",
+            "activity": "Choose one of the four activity levels.",
+            "bodyfat": "Enter body fat from 5 to 50%, or leave it blank.",
+            "tdee": "Enter a positive TDEE of no more than 20,000 kcal for this calculation.",
+            "loss": "Enter a weight-loss goal from 0.5 to 50 kg.",
+            "pace": "Choose a weekly pace of 0.25, 0.5, 0.75 or 1.0 kg.",
+            "date": "Check the goal and pace; this date cannot be calculated."
+          }
+        },
+        "formulaTitle": "How this deficit model works",
+        "formulaIntro": "The calculation uses the approximate 7,700 kcal per kilogram rule associated with Wishnofsky’s 1958 estimate. It assumes a constant deficit.",
+        "formulas": [
+          [
+            "Daily calorie deficit",
+            "The four selected paces produce 275, 550, 825 or 1,100 kcal/day.",
+            "7,700 × weekly pace (kg) ÷ 7."
+          ],
+          [
+            "Intake and model date",
+            "Dates use your local calendar and round the duration up to a whole day.",
+            "Intake = TDEE − deficit. Days = goal (kg) × 7,700 ÷ deficit."
+          ]
+        ],
+        "formulaNote": "Energy needs usually fall as weight changes. Return to recalculate; the date is a model estimate, not a promise. The 1,200/1,500 kcal flags are general warnings, not individual safety approval.",
+        "faq": [
+          [
+            "How big a calorie deficit is safe?",
+            "There is no universal safe deficit. This tool’s thresholds are warnings; seek guidance for individual needs."
+          ],
+          [
+            "How fast will I lose weight?",
+            "The model follows your selected pace. Real changes vary with physiology, adherence and changing energy needs."
+          ],
+          [
+            "What if my target falls below 1,200 calories?",
+            "A red warning appears. The threshold is 1,200 for the female coefficient and 1,500 for male."
+          ],
+          [
+            "Do I need to recalculate as I lose weight?",
+            "Yes. A smaller body often needs less energy, so your original deficit may shrink."
+          ],
+          [
+            "Can I eat back my exercise calories?",
+            "Avoid counting activity twice. Your TDEE already includes the selected activity level."
+          ],
+          [
+            "Who builds WorkoutPlanMaker, and where do the formulas come from?",
+            "WorkoutPlanMaker is built by an independent maker, not a clinic. Calculations use published formulas (Mifflin-St Jeor 1990 for BMR, U.S. Navy method for body fat, WHO ranges for BMI). Results are estimates for general information only, not medical advice. Talk to a healthcare professional before starting a new diet or exercise program."
+          ]
+        ],
+        "sources": [
+          [
+            "Wishnofsky’s estimate",
+            "https://pubmed.ncbi.nlm.nih.gov/13594881/"
+          ],
+          [
+            "Research on changing energy needs",
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC3810417/"
+          ],
+          [
+            "NIDDK adult planning guidance",
+            "https://www.niddk.nih.gov/health-information/weight-management/body-weight-planner"
+          ]
+        ],
+        "links": [
+          [
+            "Turn your target into macros →",
+            "macro-calculator.html"
+          ],
+          [
+            "Find your TDEE →",
+            "tdee-calculator.html"
+          ],
+          [
+            "Check your BMI →",
+            "bmi-calculator.html"
+          ],
+          [
+            "← Back to assessment",
+            "index.html"
+          ]
+        ],
+        "resultSource": "1 kg of body fat ≈ 7,700 kcal. A deficit of 500 kcal/day ≈ 0.5 kg/week. Targets below 1,200 kcal (women) / 1,500 kcal (men) are flagged; these thresholds do not establish individual safety.",
+        "faqTitle": "Calculator questions",
+        "nextToolsTitle": "Continue with your numbers"
+      },
+      "zh": {}
     }
   }
 };
