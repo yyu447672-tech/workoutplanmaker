@@ -48,7 +48,18 @@
     return { deficit: daily, intake: Math.round(intake), minimum: minimum, belowMinimum: intake < minimum, nonPositive: intake <= 0, days: days, weeks: days / 7, date: date, dateISO: iso };
   }
 
-  root.WorkoutCalculators = Object.freeze({ tdee: tdee, bmi: bmi, deficit: deficit });
+  function protein(input) {
+    input = input || {};
+    var age = numeric(input.age, 'AGE', 16, 80, true);
+    if (age < 18) fail('ADULT_ONLY');
+    if (input.kidneyDisease === true) return { restricted: true };
+    var kg = numeric(input.weightKg, 'WEIGHT', 30, 250);
+    if (['lose', 'maintain', 'gain'].indexOf(input.goal) === -1) fail('GOAL');
+    var low = Math.round(kg * 1.6), high = Math.round(kg * 2.2);
+    return { restricted: false, dailyLow: low, dailyHigh: high, mealLow: Math.round(low / 3), mealHigh: Math.round(high / 3), rda: Math.round(kg * .8) };
+  }
+
+  root.WorkoutCalculators = Object.freeze({ tdee: tdee, bmi: bmi, deficit: deficit, protein: protein });
   if (typeof document === 'undefined') return;
 
   function escape(value) { return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]; }); }
@@ -58,6 +69,34 @@
   function query(selector, scope) { return (scope || document).querySelector(selector); }
   function all(selector, scope) { return Array.from((scope || document).querySelectorAll(selector)); }
   function get(object, key) { return key.split('.').reduce(function (value, part) { return value && Object.prototype.hasOwnProperty.call(value, part) ? value[part] : undefined; }, object); }
+
+  function initPageCopy(copy) {
+    var page = copy.pages && copy.pages[document.body.dataset.page];
+    if (!page || !page.en) return;
+    all('[data-article-copy]').forEach(function (element) {
+      var text = get(page.en, element.dataset.articleCopy);
+      if (typeof text === 'string') element.textContent = text;
+    });
+    all('[data-long-copy]').forEach(function (element) {
+      var text = get(page.en, element.dataset.longCopy);
+      if (typeof text !== 'string') return;
+      var parts = [];
+      text.split(/(?<!U\.S\.)(?<=[.!?])\s+(?=[A-Z])/).forEach(function (sentence) {
+        var separator = sentence.indexOf(' — ') !== -1 ? ' — ' : sentence.indexOf('; ') !== -1 ? '; ' : ', ';
+        if (sentence.length > 105 && sentence.indexOf(separator) !== -1) {
+          var chunks = sentence.split(separator);
+          chunks.forEach(function (chunk, i) { parts.push(chunk + (i < chunks.length - 1 ? separator.trimEnd() : '')); });
+        } else parts.push(sentence);
+      });
+      element.replaceChildren();
+      parts.forEach(function (text, index) {
+        if (index) element.appendChild(document.createTextNode(' '));
+        var paragraph = document.createElement(element.tagName === 'P' ? 'span' : 'p');
+        paragraph.className = 'copy-paragraph'; paragraph.textContent = text;
+        element.appendChild(paragraph);
+      });
+    });
+  }
 
   function initNavigation(copy) {
     var header = query('[data-calculator-nav]'), button = header && query('[data-nav-toggle]', header), menu = query('#calculator-navigation');
@@ -114,7 +153,7 @@
 
   function initCalculator(copy) {
     var name = document.body.dataset.page;
-    if (['tdee', 'bmi', 'deficit'].indexOf(name) === -1) return;
+    if (['tdee', 'bmi', 'deficit', 'protein'].indexOf(name) === -1) return;
     var form = query('#' + name + '-form'), page = copy.pages && copy.pages[name];
     if (!form || !page || !page.en || !page.en.ui) return;
     var ui = page.en.ui;
@@ -126,12 +165,15 @@
     if (!output || !error || !interpretation || !warning) return;
     var heightUnit = query('#calc-height-unit'), weightUnit = query('#calc-weight-unit');
     var units = { height: heightUnit ? heightUnit.value : 'cm', weight: weightUnit ? weightUnit.value : 'kg' };
+    var kgPerPound = name === 'protein' ? 1 / 2.20462 : .45359237;
+    var resultSource = name === 'protein' ? query('#calc-source') : null;
     var heightCache = null, weightCache = null, pending = null, previousSignature = '';
     function value(id) { var element = query('#calc-' + id, form); return element ? element.value : ''; }
     function clearTimer() { if (pending !== null) { root.clearTimeout(pending); pending = null; } }
     function clearResult() {
       output.replaceChildren(); interpretation.textContent = ''; warning.replaceChildren(); warning.hidden = true;
       error.textContent = ''; error.hidden = true;
+      if (resultSource) resultSource.hidden = false;
     }
     function heightSnapshot() { return units.height === 'cm' ? value('height-cm') : value('height-ft') + '|' + value('height-in'); }
     function readHeight() {
@@ -149,7 +191,7 @@
       var text = value('weight');
       if (weightCache && weightCache.unit === units.weight && weightCache.text === text) return weightCache.kg;
       if (units.weight !== 'kg' && units.weight !== 'lb') fail('WEIGHT');
-      var kg = numeric(text, 'WEIGHT', Number.MIN_VALUE, Infinity) * (units.weight === 'lb' ? .45359237 : 1);
+      var kg = numeric(text, 'WEIGHT', Number.MIN_VALUE, Infinity) * (units.weight === 'lb' ? kgPerPound : 1);
       numeric(kg, 'WEIGHT', 30, 250);
       weightCache = { unit: units.weight, text: text, kg: kg }; return kg;
     }
@@ -158,7 +200,7 @@
       if (metric) metric.hidden = units.height !== 'cm';
       if (imperial) imperial.hidden = units.height !== 'imperial';
       ['height-cm', 'height-ft', 'height-in'].forEach(function (key) { var field = query('#calc-' + key); if (field) field.disabled = key === 'height-cm' ? units.height !== 'cm' : units.height !== 'imperial'; });
-      if (weight) { weight.min = units.weight === 'kg' ? '30' : String(30 / .45359237); weight.max = units.weight === 'kg' ? '250' : String(250 / .45359237); }
+      if (weight) { weight.min = units.weight === 'kg' ? '30' : String(30 / kgPerPound); weight.max = units.weight === 'kg' ? '250' : String(250 / kgPerPound); }
     }
     function switchHeight() {
       var cm = null;
@@ -176,7 +218,7 @@
       var kg = null;
       try { kg = readWeight(); } catch (_) { weightCache = null; }
       units.weight = weightUnit.value;
-      var field = query('#calc-weight'); field.value = kg === null ? '' : String(Number((units.weight === 'kg' ? kg : kg / .45359237).toFixed(6)));
+      var field = query('#calc-weight'); field.value = kg === null ? '' : String(Number((units.weight === 'kg' ? kg : kg / kgPerPound).toFixed(6)));
       weightCache = kg === null ? null : { unit: units.weight, text: field.value, kg: kg }; showUnits();
     }
     function mode() { var selected = query('input[name="deficit-mode"]:checked', form); return selected ? selected.value : ''; }
@@ -214,6 +256,13 @@
       if (underweight) warnings.push(ui.underweightWarning);
       if (warnings.length) { warning.textContent = warnings.join(' '); warning.hidden = false; }
     }
+    function renderProtein(result, goal) {
+      output.innerHTML = '<dl class="calc-stats">' +
+        statistic(ui.dailyRange, integer(result.dailyLow) + '–' + integer(result.dailyHigh) + ' <small>' + escape(ui.gramsDay) + '</small>') +
+        statistic(ui.perMeal, integer(result.mealLow) + '–' + integer(result.mealHigh) + ' <small>' + escape(ui.gramsMeal) + '</small>') +
+        statistic(ui.rda, integer(result.rda) + ' <small>' + escape(ui.gramsDay) + '</small>') + '</dl><p class="hint">' + escape(ui.rounding) + '</p>';
+      interpretation.textContent = ui.interpretation[goal];
+    }
     function update(userEdit) {
       clearResult(); showMode();
       try {
@@ -222,6 +271,20 @@
           var profile = readProfile(), energy = tdee(profile); renderTdee(energy, profile); signature = JSON.stringify(profile);
         } else if (name === 'bmi') {
           var measures = { heightCm: readHeight(), weightKg: readWeight() }; renderBmi(bmi(measures), measures.heightCm); signature = JSON.stringify(measures);
+        } else if (name === 'protein') {
+          var proteinAge = numeric(value('age'), 'AGE', 16, 80, true);
+          if (proteinAge < 18) fail('ADULT_ONLY');
+          var kidney = query('#calc-kidney', form).checked;
+          if (kidney) {
+            protein({ age: proteinAge, kidneyDisease: true });
+            clearTimer(); previousSignature = '';
+            warning.textContent = ui.kidneyMessage; warning.hidden = false;
+            if (resultSource) resultSource.hidden = true;
+            return;
+          }
+          var goalNode = query('input[name="protein-goal"]:checked', form);
+          var proteinInput = { age: proteinAge, weightKg: readWeight(), goal: goalNode ? goalNode.value : '', kidneyDisease: false };
+          renderProtein(protein(proteinInput), proteinInput.goal); signature = JSON.stringify(proteinInput);
         } else {
           var selected = query('input[name="calc-pace"]:checked', form), direct = mode() === 'direct', underweight = false, input = { sex: value('sex'), loss: value('target-loss'), pace: selected ? selected.value : '' };
           if (direct) input.tdee = value('tdee');
@@ -240,6 +303,7 @@
       } catch (problem) {
         clearTimer();
         previousSignature = '';
+        if (resultSource) resultSource.hidden = true;
         if (problem.code === 'ADULT_ONLY') {
           warning.innerHTML = escape(copy.common.en.minorNote) + '<br><span lang="zh-CN">' + escape(copy.common.zh.minorNote) + '</span>'; warning.hidden = false;
         } else {
@@ -265,7 +329,7 @@
   }
   function init() {
     if (!document.body || !root.WorkoutCopy) return;
-    initNavigation(root.WorkoutCopy); initCalculator(root.WorkoutCopy);
+    initNavigation(root.WorkoutCopy); initCalculator(root.WorkoutCopy); initPageCopy(root.WorkoutCopy);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })(typeof globalThis !== 'undefined' ? globalThis : this);

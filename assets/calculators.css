@@ -398,3 +398,74 @@ body:is([data-page="tdee"], [data-page="bmi"], [data-page="deficit"]) .table-scr
     padding: 14px 6px;
   }
 }
+
+/* Batch 3: existing guide typography and the protein calculator only. */
+.copy-paragraph { display: block; }
+.geo-answer .copy-paragraph + .copy-paragraph { margin-top: 12px; }
+.geo-answer .copy-paragraph { padding: 0; }
+.fitness-guide :is(.hero--compact, .section),
+body[data-page="protein"] :is(.hero--compact, .section) { height: auto; min-height: 100svh; }
+.fitness-guide :is(.hero--compact, .section) > .wrap,
+body[data-page="protein"] :is(.hero--compact, .section) > .wrap { height: auto; }
+.fitness-guide .guide-hero > .wrap { display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+.fitness-guide .back-link, body[data-page="protein"] .back-link { display: inline-flex; align-items: center; min-height: 44px; width: fit-content; margin-bottom: 24px; }
+.fitness-guide .geo-answer, body[data-page="protein"] .geo-answer { max-width: 65ch; font-size: 18px; line-height: 1.6; }
+.fitness-guide .geo-answer p, body[data-page="protein"] .geo-answer p { margin: 0; }
+.fitness-guide .article-layout { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 24px; align-items: start; padding-block: 0; }
+.fitness-guide .article-layout > h2 { grid-column: 1 / span 5; }
+.fitness-guide .article-layout > .guide-copy { grid-column: 6 / -1; }
+body[data-page="protein"] .calculator-layout > * { grid-column: auto; }
+.fitness-guide .article-layout h2 { max-width: 18ch; }
+.fitness-guide .guide-copy { min-width: 0; width: 100%; max-width: 100%; }
+.fitness-guide .guide-copy p { font-size: 16px; line-height: 1.7; color: var(--p-ink); margin: 0 0 14px; }
+.fitness-guide .table-scroll { max-width: 100%; overflow-x: auto; margin-block: 32px; }
+.fitness-guide .guide-table { width: 100%; min-width: 420px; font-size: 15px; line-height: 1.6; }
+.fitness-guide .guide-table caption { font-size: 15px; text-align: left; margin-bottom: 16px; }
+.fitness-guide .guide-table :is(th,td) { padding: 14px 12px; vertical-align: top; }
+.fitness-guide .source-links, body[data-page="protein"] .source-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 24px; }
+.fitness-guide .source-links a, body[data-page="protein"] .source-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 5px; }
+.fitness-guide .faq-answer .copy-paragraph, body[data-page="protein"] .faq-answer .copy-paragraph { margin: 0 0 14px; padding: 0; color: var(--p-ink); font-size: 16px; line-height: 1.65; }
+.fitness-guide .faq-item, body[data-page="protein"] .faq-item { margin-bottom: 0; }
+body[data-page="protein"] .calculator-layout { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; align-items: start; margin-top: 40px; }
+body[data-page="protein"] :is(.calculator-form,.calculator-result) { min-width: 0; max-width: 100%; padding: 32px; }
+body[data-page="protein"] .calculator-form :is(input,select) { font-size: 16px; min-width: 0; }
+body[data-page="protein"] .calculator-form .form-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 24px; margin-top: 24px; }
+body[data-page="protein"] .calc-unit-row { display: grid; grid-template-columns: minmax(0,1fr) 96px; gap: 12px; align-items: end; }
+body[data-page="protein"] .protein-goals { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 24px; }
+body[data-page="protein"] .protein-goals legend { margin-bottom: 8px; }
+body[data-page="protein"] .protein-goals label,
+body[data-page="protein"] .protein-kidney { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; cursor: pointer; font-size: 16px; line-height: 1.5; }
+body[data-page="protein"] :is(.protein-goals,.protein-kidney) input { flex: 0 0 20px; width: 20px; height: 20px; margin: 0; accent-color: var(--p-accent); }
+body[data-page="protein"] .protein-kidney { margin-block: 20px; }
+body[data-page="protein"] .calculator-form button[type="reset"] { display: flex; min-height: 44px; }
+body[data-page="protein"] .calc-stats { margin: 24px 0 0; display: grid; gap: 20px; }
+body[data-page="protein"] .calc-stat { min-width: 0; padding-bottom: 20px; border-bottom: 1px solid #d5dfdb; }
+body[data-page="protein"] .calc-stat dt { font-size: 15px; margin-bottom: 8px; }
+body[data-page="protein"] .calc-value { margin: 0; font-size: clamp(28px,3vw,38px); line-height: 1.25; letter-spacing: -.7px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+body[data-page="protein"] .calc-value small { font-size: 16px; letter-spacing: 0; }
+body[data-page="protein"] .calc-interpretation { margin-top: 24px; font-size: 16px; line-height: 1.65; }
+body[data-page="protein"] :is(.calc-source,.disclaimer), body[data-page="macro"] .calc-source { font-size: 13px; line-height: 1.6; margin-top: 20px; color: var(--p-ink); }
+body[data-page="protein"] #calc-warning { margin-top: 24px; font-size: 16px; line-height: 1.6; }
+body[data-page="protein"] .protein-list { max-width: 70ch; padding-left: 24px; margin-top: 40px; }
+body[data-page="protein"] .protein-list li { padding-left: 8px; margin-bottom: 40px; }
+body[data-page="protein"] .protein-list p, body[data-page="protein"] .protein-formula-copy p { font-size: 16px; line-height: 1.65; margin-top: 16px; max-width: 70ch; }
+@media(max-width:767px) {
+ .fitness-guide .article-layout, body[data-page="protein"] .calculator-layout { grid-template-columns: minmax(0,1fr); }
+ .fitness-guide .article-layout { gap: 32px; padding-block: 0; }
+ .fitness-guide .article-layout > h2, .fitness-guide .article-layout > .guide-copy { grid-column: 1 / -1; }
+ .fitness-guide .article-layout h2 { max-width: 100%; }
+ .fitness-guide .geo-answer, body[data-page="protein"] .geo-answer { font-size: 16px; }
+ .fitness-guide .guide-hero > .wrap { justify-content: flex-start; }
+ body[data-page="protein"] :is(.calculator-form,.calculator-result) { padding: 20px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .fitness-guide [data-enter], body[data-page="protein"] [data-enter] { opacity: 1; transform: none; }
+}
+/* Six persistent tool links need a compact row at the smallest desktop width. */
+@media (min-width: 1024px) and (max-width: 1150px) {
+ [data-calculator-nav] .nav__logo.brand { font-size: 16px; gap: 6px; }
+ [data-calculator-nav] .nav__links { gap: 2px; }
+ [data-calculator-nav] .nav__link { font-size: 13px; padding-inline: 3px; }
+}
+
+.fitness-guide .guide-hero .hero-text, body[data-page="protein"] .protein-hero .hero-text { height: auto; }
