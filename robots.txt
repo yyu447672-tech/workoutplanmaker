@@ -16,4 +16,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://yyu447672-tech.github.io/workoutplanmaker/sitemap.xml
+Sitemap: https://workoutplanmaker.com/sitemap.xml
