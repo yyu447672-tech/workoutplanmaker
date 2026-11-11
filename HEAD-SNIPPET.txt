@@ -1,0 +1,4 @@
+<!-- WorkoutPlanMaker：加到每个页面 <head> 里（下一批 C站规格书会让 Codex 全站加） -->
+<!-- 注意：16x16 和 32x32 的 favicon 引用已存在（./assets/favicon-16.png、./assets/favicon-32.png），不用重复加 -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
