@@ -469,3 +469,269 @@ body[data-page="protein"] .protein-list p, body[data-page="protein"] .protein-fo
 }
 
 .fitness-guide .guide-hero .hero-text, body[data-page="protein"] .protein-hero .hero-text { height: auto; }
+
+/* Batch 4: connect the new pages to the established calculator components. */
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) :is(.calculator-form, .calculator-result) {
+  min-width: 0;
+  max-width: 100%;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form :is(input, select) {
+  min-width: 0;
+  max-width: 100%;
+  font-size: 16px;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form :is(input[type="number"], select) {
+  min-height: 48px;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form > .form-grid:first-child {
+  margin-top: 0;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form .field {
+  line-height: 1.4;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form .hint {
+  margin-top: 10px;
+  line-height: 1.6;
+  color: var(--p-ink);
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form .scope-note {
+  margin-top: 0;
+  color: var(--p-ink);
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-unit-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(80px, 104px);
+  gap: 12px;
+  align-items: end;
+  min-width: 0;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) #height-imperial {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+  min-width: 0;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) :is(#deficit-profile, .calc-profile) {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #d5dfdb;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .mode-switch {
+  margin-bottom: 24px;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .mode-switch label {
+  padding-block: 6px;
+  min-height: 44px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .mode-switch input[type="radio"] {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+
+
+
+@media (max-width: 399px) {
+  
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form button[type="reset"] {
+  min-height: 44px;
+  margin-top: 24px;
+  white-space: normal;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) #calc-error {
+  margin-block: 16px 0;
+  color: #a62b24;
+  font-size: 14px;
+  line-height: 1.6;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) #calc-error:empty {
+  margin: 0;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form [aria-invalid="true"] {
+  outline: 2px solid #a62b24;
+  outline-offset: -2px;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) #calc-results {
+  min-width: 0;
+  max-width: 100%;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-comparison {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  font-size: 14px;
+  line-height: 1.5;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-comparison caption {
+  caption-side: top;
+  text-align: right;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--p-ink);
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-comparison :is(th, td) {
+  padding: 16px 8px;
+  overflow-wrap: anywhere;
+  vertical-align: top;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-comparison th:first-child {
+  width: 46%;
+  font-weight: 500;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-comparison .is-primary {
+  color: #0c625c;
+  background: #edf6f2;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-comparison td[colspan] {
+  text-align: left;
+  color: var(--p-muted);
+  font-size: 13px;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-stats {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-stat {
+  min-width: 0;
+  padding-block: 20px;
+  border-bottom: 1px solid #d5dfdb;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-stat:first-child {
+  padding-top: 0;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-stat dt {
+  margin-bottom: 10px;
+  color: var(--p-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-value {
+  margin: 0;
+  font-size: clamp(24px, 2.4vw, 34px);
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -.7px;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-value small {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) :is(#calc-interpretation, .calc-interpretation) {
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 1.65;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) #calc-interpretation:empty {
+  margin-top: 0;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) :is(#calc-warning, .is-warning) {
+  color: #a62b24;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) #calc-warning {
+  margin-top: 20px;
+  padding-left: 16px;
+  border-left: 3px solid #a62b24;
+  font-size: 14px;
+  line-height: 1.65;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-result .disclaimer {
+  margin-top: 24px;
+  color: var(--p-ink);
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-source {
+  margin-top: 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--p-ink);
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-formulas dd {
+  margin-inline-start: 0;
+}
+/* Formula tables must keep all rows visible when text needs more than a screen. */
+body:is([data-page="oneRm"], [data-page="bodyFat"]) #formula {
+  height: auto;
+  min-height: 100svh;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) #formula > .wrap {
+  height: auto;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) #formula .table-scroll {
+  flex-shrink: 0;
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-block: 0 20px;
+}
+
+@media (max-width: 767px) {
+  body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 639px) {
+  body:is([data-page="oneRm"], [data-page="bodyFat"]) :is(.calculator-form, .calculator-result) {
+    padding: 20px;
+  }
+  body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form #height-imperial {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form button[type="reset"] {
+    width: 100%;
+  }
+  body:is([data-page="oneRm"], [data-page="bodyFat"]) .calc-comparison :is(th, td) {
+    padding: 14px 6px;
+  }
+}
+
+
+body:is([data-page="oneRm"], [data-page="bodyFat"]) :is(.hero--compact, .section),
+body:is([data-page="oneRm"], [data-page="bodyFat"]) :is(.hero--compact, .section) > .wrap,
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .hero-text { height: auto; }
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-layout { display: grid; gap: 24px; }
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-layout > * { grid-column: auto; }
+body:is([data-page="oneRm"], [data-page="bodyFat"]) [data-enter] { opacity: 1; transform: none; }
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .back-link { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 24px; }
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .geo-answer { max-width: 65ch; font-size: 18px; line-height: 1.6; }
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .calculator-form .form-grid { gap: 24px; }
+body:is([data-page="oneRm"], [data-page="bodyFat"]) :is(.protein-list,.calculator-list) { max-width: 70ch; padding-left: 24px; margin-top: 40px; }
+body:is([data-page="oneRm"], [data-page="bodyFat"]) :is(.protein-list,.calculator-list) li { padding-left: 8px; margin-bottom: 40px; }
+body:is([data-page="oneRm"], [data-page="bodyFat"]) :is(.protein-list,.calculator-list,.protein-formula-copy,.calc-formulas) p { font-size: 16px; line-height: 1.65; margin-top: 16px; max-width: 70ch; }
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .source-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 24px; }
+body:is([data-page="oneRm"], [data-page="bodyFat"]) .source-links a { display: inline-flex; align-items: center; min-height: 44px; }
+/* The shared bar owns its layout instead of the kit's centred grid. */
+@media (min-width: 1024px) {
+  [data-calculator-nav] .nav__bar { display: flex; gap: 16px; }
+  [data-calculator-nav] .nav__links { position: static; transform: none; flex: 0 1 auto; gap: 4px; }
+  [data-calculator-nav] .nav__link { white-space: nowrap; padding-inline: 6px; font-size: 14px; }
+}
+@media (min-width: 1280px) and (max-width: 1439px) {
+  [data-calculator-nav] .nav__link { padding-inline: 4px; font-size: 12px; }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  :root:has([data-calculator-nav]) { --nav: 116px; }
+  [data-calculator-nav] .nav__bar { flex-wrap: wrap; align-content: center; gap: 4px; }
+  [data-calculator-nav] .nav__logo.brand { font-size: 20px; gap: 10px; }
+  [data-calculator-nav] .nav__links { flex: 0 0 100%; width: 100%; justify-content: space-between; margin: 0; gap: 0; }
+  [data-calculator-nav] .nav__link { padding-inline: 4px; font-size: 12px; }
+}
+body:is([data-page="oneRm"], [data-page="bodyFat"]) :is(#uses, #features) ol { list-style: decimal outside; }
+@media (max-width: 767px) {
+  body:is([data-page="oneRm"], [data-page="bodyFat"]) .geo-answer { font-size: 16px; }
+}

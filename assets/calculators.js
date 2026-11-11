@@ -59,7 +59,26 @@
     return { restricted: false, dailyLow: low, dailyHigh: high, mealLow: Math.round(low / 3), mealHigh: Math.round(high / 3), rda: Math.round(kg * .8) };
   }
 
-  root.WorkoutCalculators = Object.freeze({ tdee: tdee, bmi: bmi, deficit: deficit, protein: protein });
+  function oneRm(input) {
+    input = input || {};
+    var age = numeric(input.age, 'AGE', 16, 80, true); if (age < 18) fail('ADULT_ONLY');
+    var w = numeric(input.weightKg, 'WEIGHT', 20, 300), r = numeric(input.reps, 'REPS', 1, 10, true);
+    return { epley: r === 1 ? w : w * (1 + r / 30), brzycki: r === 1 ? w : w * 36 / (37-r), lander: r === 1 ? w : 100*w/(101.3-2.67123*r), lombardi: r === 1 ? w : w*Math.pow(r,.10), oconner: r === 1 ? w : w*(1+.025*r), mayhew: r === 1 ? w : 100*w/(52.2+41.9*Math.exp(-.055*r)), wathen: r === 1 ? w : 100*w/(48.8+53.8*Math.exp(-.075*r)) };
+  }
+  function bodyFat(input) {
+    input = input || {};
+    var age = numeric(input.age, 'AGE', 16, 80, true); if (age < 18) fail('ADULT_ONLY');
+    var sex = sexValue(input.sex), h = numeric(input.heightCm,'HEIGHT',130,220), n = numeric(input.neckCm,'NECK',25,60), w = numeric(input.waistCm,'WAIST',50,150), kg = numeric(input.weightKg,'WEIGHT',30,250);
+    var difference = sex === 'male' ? w-n : w+numeric(input.hipCm,'HIP',60,160)-n;
+    if (difference <= 0) fail('BODYFAT');
+    var density = sex === 'male' ? 1.0324-.19077*Math.log10(difference)+.15456*Math.log10(h) : 1.29579-.35004*Math.log10(difference)+.221*Math.log10(h);
+    var fat = 495/density-450; if (!Number.isFinite(fat) || fat < 0 || fat > 100) fail('BODYFAT');
+    var limits = sex === 'male' ? [2,6,14,18,25] : [10,14,21,25,32];
+    var category = fat < limits[0] ? 'belowEssential' : fat < limits[1] ? 'essential' : fat < limits[2] ? 'athletes' : fat < limits[3] ? 'fitness' : fat < limits[4] ? 'average' : 'obese';
+    return { bodyFat: fat, fatMass: kg*fat/100, leanMass: kg*(1-fat/100), category: category, belowEssential: category === 'belowEssential' };
+  }
+
+  root.WorkoutCalculators = Object.freeze({ tdee: tdee, bmi: bmi, deficit: deficit, protein: protein, oneRm: oneRm, bodyFat: bodyFat });
   if (typeof document === 'undefined') return;
 
   function escape(value) { return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]; }); }
@@ -153,7 +172,7 @@
 
   function initCalculator(copy) {
     var name = document.body.dataset.page;
-    if (['tdee', 'bmi', 'deficit', 'protein'].indexOf(name) === -1) return;
+    if (['tdee', 'bmi', 'deficit', 'protein', 'oneRm', 'bodyFat'].indexOf(name) === -1) return;
     var form = query('#' + name + '-form'), page = copy.pages && copy.pages[name];
     if (!form || !page || !page.en || !page.en.ui) return;
     var ui = page.en.ui;
@@ -165,8 +184,8 @@
     if (!output || !error || !interpretation || !warning) return;
     var heightUnit = query('#calc-height-unit'), weightUnit = query('#calc-weight-unit');
     var units = { height: heightUnit ? heightUnit.value : 'cm', weight: weightUnit ? weightUnit.value : 'kg' };
-    var kgPerPound = name === 'protein' ? 1 / 2.20462 : .45359237;
-    var resultSource = name === 'protein' ? query('#calc-source') : null;
+    var kgPerPound = ['protein', 'oneRm', 'bodyFat'].indexOf(name) !== -1 ? 1 / 2.20462 : .45359237;
+    var resultSource = ['protein', 'oneRm', 'bodyFat'].indexOf(name) !== -1 ? query('#calc-source') : null;
     var heightCache = null, weightCache = null, pending = null, previousSignature = '';
     function value(id) { var element = query('#calc-' + id, form); return element ? element.value : ''; }
     function clearTimer() { if (pending !== null) { root.clearTimeout(pending); pending = null; } }
@@ -192,7 +211,7 @@
       if (weightCache && weightCache.unit === units.weight && weightCache.text === text) return weightCache.kg;
       if (units.weight !== 'kg' && units.weight !== 'lb') fail('WEIGHT');
       var kg = numeric(text, 'WEIGHT', Number.MIN_VALUE, Infinity) * (units.weight === 'lb' ? kgPerPound : 1);
-      numeric(kg, 'WEIGHT', 30, 250);
+      numeric(kg, 'WEIGHT', name === 'oneRm' ? 20 : 30, name === 'oneRm' ? 300 : 250);
       weightCache = { unit: units.weight, text: text, kg: kg }; return kg;
     }
     function showUnits() {
@@ -200,7 +219,7 @@
       if (metric) metric.hidden = units.height !== 'cm';
       if (imperial) imperial.hidden = units.height !== 'imperial';
       ['height-cm', 'height-ft', 'height-in'].forEach(function (key) { var field = query('#calc-' + key); if (field) field.disabled = key === 'height-cm' ? units.height !== 'cm' : units.height !== 'imperial'; });
-      if (weight) { weight.min = units.weight === 'kg' ? '30' : String(30 / kgPerPound); weight.max = units.weight === 'kg' ? '250' : String(250 / kgPerPound); }
+      if (weight) { weight.min = String((name === 'oneRm' ? 20 : 30) / (units.weight === 'lb' ? kgPerPound : 1)); weight.max = String((name === 'oneRm' ? 300 : 250) / (units.weight === 'lb' ? kgPerPound : 1)); }
     }
     function switchHeight() {
       var cm = null;
@@ -263,11 +282,43 @@
         statistic(ui.rda, integer(result.rda) + ' <small>' + escape(ui.gramsDay) + '</small>') + '</dl><p class="hint">' + escape(ui.rounding) + '</p>';
       interpretation.textContent = ui.interpretation[goal];
     }
+    var circumferenceUnit = query('#calc-circumference-unit'), circumferenceMode = circumferenceUnit ? circumferenceUnit.value : 'cm', circumferenceCache = {};
+    function readCircumference(k) {
+      var text = value(k), cached = circumferenceCache[k];
+      if (k === 'hip' && value('sex') !== 'female') return undefined;
+      numeric(text, k.toUpperCase(), Number.MIN_VALUE, Infinity);
+      if (cached && cached.text === text && cached.unit === circumferenceMode) return cached.cm;
+      return Number(text) * (circumferenceMode === 'in' ? 2.54 : 1);
+    }
+    function renderNew(result) {
+      var factor = units.weight === 'lb' ? 2.20462 : 1, unit = ui[units.weight];
+      function mass(n) { return (n*factor).toFixed(1); }
+      function table(caption, headings, rows) { return '<div class="table-scroll" tabindex="0" role="region" aria-label="'+escape(caption)+'"><table class="calc-comparison"><caption>'+escape(caption)+'</caption><thead><tr>'+headings.map(function(h){return '<th scope="col">'+escape(h)+'</th>';}).join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>'; }
+      if (name === 'oneRm') {
+        var displayed = Number(mass(result.epley));
+        output.innerHTML = '<dl class="calc-stats">'+statistic(ui.estimatedMax,mass(result.epley)+' <small>'+escape(unit)+'</small>')+'</dl>'+table(ui.formulaTable,[ui.formula,ui.estimatedMax],Object.keys(result).map(function(k){return '<tr><th scope="row">'+escape(ui[k])+'</th><td>'+mass(result[k])+' '+escape(unit)+'</td></tr>';}))+table(ui.trainingTable,[ui.percentage,ui.weight,ui.reps],[100,95,93,90,87,85,83,80,77,75,70,67].map(function(p,i){return '<tr><th scope="row">'+p.toFixed(1)+'%</th><td>'+(displayed*p/100).toFixed(1)+' '+escape(unit)+'</td><td>'+ (i+1)+'</td></tr>';}));
+        interpretation.textContent = format(ui.interpretOneRm,{max:mass(result.epley),unit:unit});
+      } else {
+        output.innerHTML = '<dl class="calc-stats">'+statistic(ui.bodyFat,result.bodyFat.toFixed(1)+'%')+statistic(ui.fatMass,mass(result.fatMass)+' <small>'+escape(unit)+'</small>')+statistic(ui.leanMass,mass(result.leanMass)+' <small>'+escape(unit)+'</small>')+statistic(ui.category,escape(ui[result.category]))+'</dl>';
+        interpretation.textContent = format(ui.interpretBodyFat,{percent:result.bodyFat.toFixed(1),category:ui[result.category],sex:ui[value('sex')],fat:mass(result.fatMass),lean:mass(result.leanMass),unit:unit});
+        if(result.belowEssential) { warning.textContent=ui.belowEssentialWarning; warning.hidden=false; }
+      }
+    }
     function update(userEdit) {
       clearResult(); showMode();
+      if (name === 'bodyFat') {
+        var circumferenceFactor = circumferenceMode === 'in' ? 2.54 : 1;
+        [['neck',25,60],['waist',50,150],['hip',60,160]].forEach(function (range) { var field = query('#calc-' + range[0]); field.min = String(range[1] / circumferenceFactor); field.max = String(range[2] / circumferenceFactor); });
+      }
       try {
         var signature;
-        if (name === 'tdee') {
+        if (name === 'oneRm' || name === 'bodyFat') {
+          var newAge = numeric(value('age'), 'AGE', 16, 80, true); if (newAge < 18) fail('ADULT_ONLY');
+          var newInput = { age: newAge, weightKg: readWeight() };
+          if (name === 'oneRm') { newInput.reps = value('reps'); renderNew(oneRm(newInput)); }
+          else { newInput.sex = value('sex'); newInput.heightCm = readHeight(); ['neck','waist','hip'].forEach(function(k) { newInput[k+'Cm'] = readCircumference(k); }); renderNew(bodyFat(newInput)); }
+          signature = JSON.stringify(newInput);
+        } else if (name === 'tdee') {
           var profile = readProfile(), energy = tdee(profile); renderTdee(energy, profile); signature = JSON.stringify(profile);
         } else if (name === 'bmi') {
           var measures = { heightCm: readHeight(), weightKg: readWeight() }; renderBmi(bmi(measures), measures.heightCm); signature = JSON.stringify(measures);
@@ -297,7 +348,7 @@
         }
         if (!userEdit || signature !== previousSignature) clearTimer();
         if (userEdit && signature !== previousSignature && /^https?:$/.test(root.location.protocol)) {
-          pending = root.setTimeout(function () { pending = null; if (typeof root.gtag === 'function') root.gtag('event', name + '_calculate', { tool: name }); }, 400);
+          pending = root.setTimeout(function () { pending = null; if (typeof root.gtag === 'function') root.gtag('event', (name === 'oneRm' ? 'one_rep_max_calculate' : name === 'bodyFat' ? 'body_fat_calculate' : name + '_calculate'), { tool: name }); }, 400);
         }
         previousSignature = signature;
       } catch (problem) {
@@ -313,6 +364,11 @@
     }
     function edited(event) {
       var id = event.target.id;
+      if (id === 'calc-circumference-unit' && circumferenceMode !== circumferenceUnit.value) {
+        ['neck','waist','hip'].forEach(function(k) { var field=query('#calc-'+k); var cm; try { cm=readCircumference(k); } catch (_) { cm=NaN; } field.value=Number.isFinite(cm) && field.value.trim() ? String(Number((cm/(circumferenceUnit.value === 'in' ? 2.54 : 1)).toFixed(6))) : ''; circumferenceCache[k]={cm:cm,text:field.value,unit:circumferenceUnit.value}; }); circumferenceMode=circumferenceUnit.value;
+      }
+      if(name === 'bodyFat') { var hipWrap=query('#bodyfat-hip-wrap'); if(hipWrap) hipWrap.hidden=value('sex') !== 'female'; var hipField=query('#calc-hip'); if(hipField) hipField.disabled=value('sex') !== 'female'; }
+
       if (id === 'calc-height-unit') { if (heightUnit.value !== units.height) switchHeight(); }
       else if (id === 'calc-weight-unit') { if (weightUnit.value !== units.weight) switchWeight(); }
       else if (['calc-height-cm', 'calc-height-ft', 'calc-height-in'].indexOf(id) !== -1) heightCache = null;
@@ -323,8 +379,9 @@
     form.addEventListener('submit', function (event) { event.preventDefault(); update(true); });
     form.addEventListener('reset', function () {
       clearTimer();
-      root.setTimeout(function () { units.height = heightUnit ? heightUnit.value : 'cm'; units.weight = weightUnit ? weightUnit.value : 'kg'; heightCache = null; weightCache = null; previousSignature = ''; showUnits(); update(false); }, 0);
+      root.setTimeout(function () { units.height = heightUnit ? heightUnit.value : 'cm'; units.weight = weightUnit ? weightUnit.value : 'kg'; heightCache = null; weightCache = null; previousSignature = ''; circumferenceMode = circumferenceUnit ? circumferenceUnit.value : 'cm'; circumferenceCache = {}; var hw=query('#bodyfat-hip-wrap'); if(hw) hw.hidden=value('sex') !== 'female'; showUnits(); update(false); }, 0);
     });
+    if(name === 'bodyFat') { var hipWrap=query('#bodyfat-hip-wrap'); if(hipWrap) hipWrap.hidden=value('sex') !== 'female'; }
     showUnits(); update(false);
   }
   function init() {

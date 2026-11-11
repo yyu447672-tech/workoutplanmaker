@@ -2057,6 +2057,318 @@ window.WorkoutCopy = {
         ],
         "rangeNote": "This range estimates training needs for healthy adults doing resistance exercise. Individual needs vary."
       }
+    },
+    "oneRm": {
+      "en": {
+        "title": "1RM Calculator - Estimate Your One Rep Max",
+        "description": "1RM calculator: enter the weight you lifted and your reps to estimate your one-rep max with 7 formulas. Free, no sign-up.",
+        "heading": "1RM Calculator",
+        "intro": "How much can you lift for one rep? This 1RM calculator estimates your one-rep max from the weight you lifted and the reps you finished. Enter 100 kg for 5 reps and the Epley formula gives about 117 kg. The page also shows six more formulas and your training weights at 67–100% of your max.",
+        "scope": "For adult estimates only. Children and teens need age-appropriate professional guidance.",
+        "useHeading": "Use cases",
+        "featureHeading": "Key features",
+        "formulaHeading": "How the estimate is calculated",
+        "uses": [
+          {
+            "heading": "Plan your training",
+            "body": "find your max, then set weights as a share of it."
+          },
+          {
+            "heading": "Track progress",
+            "body": "retest the same lift and compare your max over time."
+          },
+          {
+            "heading": "Skip max testing",
+            "body": "estimate your max from a hard set without lifting it."
+          }
+        ],
+        "features": [
+          {
+            "heading": "Seven formulas",
+            "body": "Epley, Brzycki and five more, side by side."
+          },
+          {
+            "heading": "Training loads",
+            "body": "your weights at 67–100% of your max."
+          },
+          {
+            "heading": "Private by design",
+            "body": "everything runs in your browser, no sign-up."
+          }
+        ],
+        "formulaParagraphs": [
+          "Epley (1985): 1RM = w × (1 + r ÷ 30)",
+          "Brzycki (1993): 1RM = w × 36 ÷ (37 − r)",
+          "Lander (1985): 1RM = 100w ÷ (101.3 − 2.67123 × r)",
+          "Lombardi (1989): 1RM = w × r^0.10",
+          "O'Conner (1989): 1RM = w × (1 + 0.025 × r)",
+          "Mayhew et al. (1992): 1RM = 100w ÷ (52.2 + 41.9 × e^(−0.055r))",
+          "Wathen (1994): 1RM = 100w ÷ (48.8 + 53.8 × e^(−0.075r))",
+          "w is the weight you lifted.",
+          "r is the reps you finished.",
+          "Estimates are most reliable from 2–10 reps.",
+          "All seven formulas disagree by a few percent.",
+          "That spread is normal.",
+          "Do not test a true one-rep max alone.",
+          "Use a spotter and safety bars.",
+          "Epley B (1985), Poundage Chart. Brzycki M (1993), Strength testing — predicting a one-rep max from reps-to-fatigue.",
+          "Lombardi VP (1989), Beginning Weight Training. O'Conner B, Simmons J, O'Shea P (1989), Weight Training Today.",
+          "Mayhew JL et al. (1992), bench press strength prediction. Lander J (1985), maximum based on reps.",
+          "Wathen D (1994), Load assignment, in Essentials of Strength Training and Conditioning (NSCA)."
+        ],
+        "resultSource": "Estimated 1RM from 7 formulas (Epley 1985, Brzycki 1993, Lander 1985, Lombardi 1989, O'Conner 1989, Mayhew 1992, Wathen 1994).",
+        "faq": [
+          [
+            "What is a 1RM?",
+            "How much can you lift for one rep? This 1RM calculator estimates your one-rep max from the weight you lifted and the reps you finished. Enter 100 kg for 5 reps and the Epley formula gives about 117 kg. The page also shows six more formulas and your training weights at 67–100% of your max."
+          ],
+          [
+            "Which formula should I use?",
+            "Epley is the most common default. Brzycki runs a little lower. Check the full table and use the middle of the range."
+          ],
+          [
+            "How many reps should I enter?",
+            "Use a hard set of 2–10 reps taken close to failure. Sets above 10 reps give rough estimates only."
+          ],
+          [
+            "Why do the formulas disagree?",
+            "Each formula was fitted to a different group of lifters. A spread of a few percent is normal, not an error."
+          ],
+          [
+            "Is it safe to test my true 1RM?",
+            "A true max test is hard on your body and carries injury risk. Use a spotter, warm up well, and use safety bars. This calculator estimates your max so you can skip the test."
+          ],
+          [
+            "Who builds WorkoutPlanMaker, and where do the formulas come from?",
+            "WorkoutPlanMaker is built by an independent maker, not a clinic. Calculations use published formulas (Mifflin-St Jeor 1990 for BMR, U.S. Navy method for body fat, WHO ranges for BMI). Results are estimates for general information only, not medical advice. Talk to a healthcare professional before starting a new diet or exercise program."
+          ]
+        ],
+        "related": [
+          {
+            "label": "See your full macro split →",
+            "href": "./macro-calculator.html"
+          },
+          {
+            "label": "Check your protein target →",
+            "href": "./protein-calculator.html"
+          },
+          {
+            "label": "← Back to assessment",
+            "href": "./index.html"
+          }
+        ],
+        "ui": {
+          "title": "Your inputs",
+          "age": "Age",
+          "years": "years",
+          "weight": "Weight",
+          "units": "Units",
+          "resultTitle": "Your estimated one-rep max",
+          "reset": "Reset calculator",
+          "defaultsNote": "These editable examples illustrate the calculation.",
+          "error": {
+            "missing": "Complete all required measurements.",
+            "age": "Enter a whole age from 16 to 80.",
+            "weight": "Enter a weight within the displayed range.",
+            "reps": "Enter whole repetitions from 1 to 10.",
+            "height": "Enter a height from 130 to 220 cm.",
+            "neck": "Enter a neck measurement from 25 to 60 cm.",
+            "waist": "Enter a waist measurement from 50 to 150 cm.",
+            "hip": "Enter a hip measurement from 60 to 160 cm.",
+            "sex": "Choose male or female.",
+            "bodyfat": "Check your measurements. This combination cannot produce a valid body fat estimate."
+          },
+          "kg": "kg",
+          "lb": "lb",
+          "formula": "Formula",
+          "estimatedMax": "Estimated 1RM",
+          "formulaTable": "Seven formula estimates",
+          "trainingTable": "Training loads",
+          "percentage": "Percentage",
+          "reps": "Approximate reps",
+          "epley": "Epley (1985)",
+          "brzycki": "Brzycki (1993)",
+          "lander": "Lander (1985)",
+          "lombardi": "Lombardi (1989)",
+          "oconner": "O’Conner (1989)",
+          "mayhew": "Mayhew et al. (1992)",
+          "wathen": "Wathen (1994)",
+          "bodyFat": "Body fat",
+          "fatMass": "Fat mass",
+          "leanMass": "Lean mass",
+          "category": "ACE category",
+          "essential": "Essential",
+          "athletes": "Athletes",
+          "fitness": "Fitness",
+          "average": "Average",
+          "obese": "Obese",
+          "belowEssential": "Below essential range",
+          "male": "men",
+          "female": "women",
+          "belowEssentialWarning": "This estimate is below the ACE essential fat range. Ask a qualified professional for guidance.",
+          "interpretOneRm": "Your estimated 1RM is about {max} {unit} (Epley). Most strength work uses 70–85% of it.",
+          "interpretBodyFat": "At {percent}% body fat, you are in the ACE {category} range for {sex}. Your fat mass is {fat} {unit} and lean mass is {lean} {unit}.",
+          "weightLifted": "Weight lifted",
+          "weightUnits": "Weight units",
+          "repsCompleted": "Reps completed"
+        }
+      }
+    },
+    "bodyFat": {
+      "en": {
+        "title": "Body Fat Calculator - U.S. Navy Method",
+        "description": "Body fat calculator: enter your height and waist to estimate body fat with the U.S. Navy method. Free, no sign-up.",
+        "heading": "Body Fat Calculator",
+        "intro": "How much body fat do you carry? This body fat calculator uses the U.S. Navy method: your height, neck and waist size, plus hip size for women. A man 180 cm tall with a 40 cm neck and 90 cm waist scores about 18%. The page also shows your fat mass, lean mass and ACE category.",
+        "scope": "For adult estimates only. Children and teens need age-appropriate professional guidance.",
+        "useHeading": "Use cases",
+        "featureHeading": "Key features",
+        "formulaHeading": "How the estimate is calculated",
+        "uses": [
+          {
+            "heading": "Track fat loss",
+            "body": "compare your number month to month."
+          },
+          {
+            "heading": "Set a goal",
+            "body": "pick a healthy range and work toward it."
+          },
+          {
+            "heading": "See beyond weight",
+            "body": "muscle gain can hide under a flat scale."
+          }
+        ],
+        "features": [
+          {
+            "heading": "Navy method",
+            "body": "height and tape measurements, no calipers."
+          },
+          {
+            "heading": "Fat and lean mass",
+            "body": "your weight split into fat and lean mass."
+          },
+          {
+            "heading": "Private by design",
+            "body": "everything runs in your browser, no sign-up."
+          }
+        ],
+        "formulaParagraphs": [
+          "Men: body fat percentage = 495 ÷ (1.0324 − 0.19077 × log10(waist − neck) + 0.15456 × log10(height)) − 450",
+          "Women: body fat percentage = 495 ÷ (1.29579 − 0.35004 × log10(waist + hip − neck) + 0.22100 × log10(height)) − 450",
+          "All measurements go in as centimeters. Inches convert first.",
+          "Hodgdon JA, Beckett MB (1984), Prediction of percent body fat for U.S. Navy men and women from body circumferences.",
+          "American Council on Exercise (ACE), body fat percentage categories."
+        ],
+        "resultSource": "Body fat estimated with the U.S. Navy circumference method (Hodgdon & Beckett 1984). Ranges follow ACE body fat categories.",
+        "faq": [
+          [
+            "How do I calculate my body fat percentage?",
+            "How much body fat do you carry? This body fat calculator uses the U.S. Navy method: your height, neck and waist size, plus hip size for women. A man 180 cm tall with a 40 cm neck and 90 cm waist scores about 18%. The page also shows your fat mass, lean mass and ACE category."
+          ],
+          [
+            "What is a healthy body fat percentage?",
+            "For men, the ACE fitness range is 14–17% and average is 18–24%. For women, fitness is 21–24% and average is 25–31%."
+          ],
+          [
+            "How accurate is the Navy method?",
+            "It is an estimate, not a scan. Tape measurements and body shape shift the result by a few points. Use it to track change over time."
+          ],
+          [
+            "Do I need my hip measurement?",
+            "Women do; the formula uses waist plus hip minus neck. Men do not need a hip measurement."
+          ],
+          [
+            "Can body fat be too low?",
+            "Yes. Men need at least 2–5% and women 10–13% for basic body functions. Below that, talk to a doctor."
+          ],
+          [
+            "Who builds WorkoutPlanMaker, and where do the formulas come from?",
+            "WorkoutPlanMaker is built by an independent maker, not a clinic. Calculations use published formulas (Mifflin-St Jeor 1990 for BMR, U.S. Navy method for body fat, WHO ranges for BMI). Results are estimates for general information only, not medical advice. Talk to a healthcare professional before starting a new diet or exercise program."
+          ]
+        ],
+        "related": [
+          {
+            "label": "Check your BMI →",
+            "href": "./bmi-calculator.html"
+          },
+          {
+            "label": "Check your protein target →",
+            "href": "./protein-calculator.html"
+          },
+          {
+            "label": "← Back to assessment",
+            "href": "./index.html"
+          }
+        ],
+        "ui": {
+          "title": "Your inputs",
+          "age": "Age",
+          "years": "years",
+          "weight": "Weight",
+          "units": "Units",
+          "resultTitle": "Your body fat estimate",
+          "reset": "Reset calculator",
+          "defaultsNote": "These editable examples illustrate the calculation.",
+          "error": {
+            "missing": "Complete all required measurements.",
+            "age": "Enter a whole age from 16 to 80.",
+            "weight": "Enter a weight within the displayed range.",
+            "reps": "Enter whole repetitions from 1 to 10.",
+            "height": "Enter a height from 130 to 220 cm.",
+            "neck": "Enter a neck measurement from 25 to 60 cm.",
+            "waist": "Enter a waist measurement from 50 to 150 cm.",
+            "hip": "Enter a hip measurement from 60 to 160 cm.",
+            "sex": "Choose male or female.",
+            "bodyfat": "Check your measurements. This combination cannot produce a valid body fat estimate."
+          },
+          "kg": "kg",
+          "lb": "lb",
+          "formula": "Formula",
+          "estimatedMax": "Estimated 1RM",
+          "formulaTable": "Seven formula estimates",
+          "trainingTable": "Training loads",
+          "percentage": "Percentage",
+          "reps": "Approximate reps",
+          "epley": "Epley (1985)",
+          "brzycki": "Brzycki (1993)",
+          "lander": "Lander (1985)",
+          "lombardi": "Lombardi (1989)",
+          "oconner": "O’Conner (1989)",
+          "mayhew": "Mayhew et al. (1992)",
+          "wathen": "Wathen (1994)",
+          "bodyFat": "Body fat",
+          "fatMass": "Fat mass",
+          "leanMass": "Lean mass",
+          "category": "ACE category",
+          "essential": "Essential",
+          "athletes": "Athletes",
+          "fitness": "Fitness",
+          "average": "Average",
+          "obese": "Obese",
+          "belowEssential": "Below essential range",
+          "male": "men",
+          "female": "women",
+          "belowEssentialWarning": "This estimate is below the ACE essential fat range. Ask a qualified professional for guidance.",
+          "interpretOneRm": "Your estimated 1RM is about {max} {unit} (Epley). Most strength work uses 70–85% of it.",
+          "interpretBodyFat": "At {percent}% body fat, you are in the ACE {category} range for {sex}. Your fat mass is {fat} {unit} and lean mass is {lean} {unit}.",
+          "sex": "Sex",
+          "heightUnits": "Height units",
+          "heightCm": "Height (cm)",
+          "heightFt": "Height (ft)",
+          "heightIn": "Height (in)",
+          "tapeUnits": "Tape units",
+          "neck": "Neck",
+          "waist": "Waist",
+          "hip": "Hip",
+          "bodyWeight": "Body weight",
+          "weightUnits": "Weight units",
+          "sexMale": "Male",
+          "sexFemale": "Female",
+          "cm": "cm",
+          "feetInches": "ft / in",
+          "in": "in"
+        }
+      }
     }
   }
 };
