@@ -86,7 +86,7 @@
     }
     function captureMeasures() { ['waist','neck','hips'].forEach(function(k){var f=$('#measure-'+k);if(f)measurements[k]=f.value;}); }
     function preserveWeight() { var f=$('#answer-weight');if(f && f.value!=='')state.weightKg=readWeight(); }
-    function invalidate() { result=null;$('#your-plan').hidden=true;$('#results-body').replaceChildren(); }
+    function invalidate() { if(document.body.dataset.page==="myPlan")return;result=null;$('#your-plan').hidden=true;$('#results-body').replaceChildren(); }
     function unitSwitch(type) {
       var isHeight=type==='height', current=units[type];
       try {
@@ -145,6 +145,7 @@
     function module(title,body,wide) {return '<article class="result-module'+(wide?' result-wide':'')+'" data-result-module><h3>'+escape(C[title])+'</h3>'+body+'</article>';}
     function complete() {
       try {
+        if(document.body.dataset.page==='myPlan'){window.WorkoutPlan.completed(state,units);return;}
         if(Number(state.age)<18) { completeMinor();return; }
         result=Core.calculate(state);
         if(result.bmi<18.5 && state.goal==='lose') {$('#quiz-error').textContent=C.underweightLoss;result=null;return;}
@@ -160,6 +161,7 @@
         drawBar($('#results-body'),m);
         $('#quiz-progress').value=8; $('#your-plan').hidden=false;$('#your-plan h2').textContent=C.resultsTitle;$('#your-plan .section-lead').textContent=C.resultsLead;$('#result-macro-link').hidden=false;
         $('#print-plan').addEventListener('click',function(){event('plan_print_click','assessment');window.print();});
+        if(window.WorkoutPlan)window.WorkoutPlan.completed(state,units);
         event('quiz_complete','assessment');
         $('#your-plan').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
       } catch(e) {$('#quiz-error').textContent=message(e);}
@@ -175,13 +177,14 @@
       $('#your-plan h2').textContent=C.minorTitle;$('#your-plan .section-lead').innerHTML=escape(C.minorNote)+'<br><span lang="zh-CN">'+escape(window.WorkoutCopy.common.zh.minorNote)+'</span>';$('#result-macro-link').hidden=true;
       $('#quiz-progress').value=8;$('#your-plan').hidden=false;
       $('#print-plan').addEventListener('click',function(){event('plan_print_click','assessment');window.print();});
-      event('quiz_complete','assessment');$('#your-plan').scrollIntoView({behavior:'instant',block:'start'});
+      if(window.WorkoutPlan)window.WorkoutPlan.completed(state,units);
+        event('quiz_complete','assessment');$('#your-plan').scrollIntoView({behavior:'instant',block:'start'});
     }
     $('#quiz-form').addEventListener('submit',function(e){e.preventDefault();begin();try{saveNumeric();advance();}catch(err){$('#quiz-error').textContent=message(err);var f=$('input:invalid',$('#quiz-fieldset'));if(f)f.focus();}});
     $('#quiz-back').addEventListener('click',function(){try{saveNumeric();}catch(e){}invalidate();if(at>0){at--;render();}});
-    $('#edit-answers').addEventListener('click',function(){invalidate();at=0;render();toQuiz();});
+    if($('#edit-answers'))$('#edit-answers').addEventListener('click',function(){invalidate();at=0;render();toQuiz();});
     $$('[data-start]').forEach(function(a){a.addEventListener('click',function(){invalidate();begin();});});
-    $('#hero-form').addEventListener('submit',function(e){e.preventDefault();var age=$('#hero-age').value;try{validatePatch({age:age});state.age=Number(age);invalidate();begin();at=1;render();$('#hero-error').textContent='';toQuiz();}catch(err){$('#hero-error').textContent=message(err);}});
+    if($('#hero-form'))$('#hero-form').addEventListener('submit',function(e){e.preventDefault();var age=$('#hero-age').value;try{validatePatch({age:age});state.age=Number(age);invalidate();begin();at=1;render();$('#hero-error').textContent='';toQuiz();}catch(err){$('#hero-error').textContent=message(err);}});
     render();
   }
   function initMacro() {
