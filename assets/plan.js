@@ -7,8 +7,8 @@
   function save(raw,units) { var p=normalized(raw);p.heightUnit=units.height;p.weightUnit=units.weight;storage('set',ANSWERS,JSON.stringify(p));return p; }
   function read() {try { var saved=JSON.parse(storage('get',ANSWERS)); if(!saved||!['metric','imperial'].includes(saved.heightUnit)||!['metric','imperial'].includes(saved.weightUnit))return null;return normalized(saved); }catch(e){return null;} }
   function key(value) { return String(value||'').replace(/\s/g,'').toUpperCase(); }
-  // Static site: no server-side validation is possible. This check verifies key shape only. The Creem API key must never appear in client code.
-  function valid(value) {return /^[A-Z0-9]{6}-[A-Z0-9]{6}-[A-Z0-9]{6}-[A-Z0-9]{6}$/.test(value);}
+  // Static site: no server-side validation is possible. This check verifies key shape only. Creem issues keys as five groups of five uppercase alphanumeric characters (docs.creem.io, Webhooks / License keys). The older four-groups-of-six shape is still accepted for backward compatibility with earlier test keys. The Creem API key must never appear in client code.
+  function valid(value) {return /^([A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}|[A-Z0-9]{6}-[A-Z0-9]{6}-[A-Z0-9]{6}-[A-Z0-9]{6})$/.test(value);}
   function reps(value,week) {var match=/^(\d+)–(\d+)( per side| seconds)?$/.exec(value);if(!match||week===1)return value;var n=week===2?Math.floor((+match[1]+ +match[2])/2):week===3?+match[1]:+match[2];return n+(match[3]||'');}
   function weeks(p) {return [1,2,3,4].map(function(w){return Data.getPlan(p.days,p.equipment).map(function(d){return Object.assign({},d,{exercises:d.exercises.map(function(e,i){return Object.assign({},e,{sets:w===4?2:e.sets+(w===3&&i<2?1:0),reps:reps(e.reps,w===3&&i>=2?2:w)});})});});});}
   var API=root.WorkoutPlan={save:save,read:read,normalized:normalized,validKey:valid,normalizeKey:key,reps:reps,weeks:weeks,storage:storage};
