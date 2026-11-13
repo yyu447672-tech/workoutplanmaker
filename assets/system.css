@@ -56,8 +56,7 @@
   /* spacing: 4/8 scale */
   --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 24px;
   --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
-  --section: 40px;      /* only a .section outside main (the kit's demo pages); every main > section and
-                           footer.closing take --padt and --padb */
+  --section: 32px;      /* Polish 27: 40 -> 32 (only a .section outside main reads this; main sections take --padt/--padb, tightened in style.css) */
   --section-band: 56px; /* the same for an older footer outside footer.closing */
   --head-gap: 48px;     /* the one heading-to-content gap, 32 on a phone (layout.css reads it as --ly-head-gap) */
   --card-pad: 16px;     /* card padding (cards.css sets its own for cards with a panel) */
@@ -108,10 +107,10 @@ html[data-radius] .panel { --p-r: var(--r-md); }
   :root { --nav: 56px; --padt: 96px; --padb: 48px; --hgap: 40px; --hpadb: 24px; --gut: 24px; --gutter: 12px; --card-gap: 12px; --head-gap: 32px; }
 }
 @media (min-width: 640px) {
-  :root { --gut: 48px; --section: 48px; --section-band: 72px; --card-pad: 24px; }
+  :root { --gut: 48px; --section: 40px; --section-band: 72px; --card-pad: 24px; }
 }
 @media (min-width: 1024px) {
-  :root { --gut: 80px; --section: 56px; --section-band: 96px; --card-gap: 24px;
+  :root { --gut: 80px; --section: 48px; --section-band: 96px; --card-gap: 24px;
           --t-lead: 20px; --t-card: 20px; --t-h3: 28px; }
   /* a place (and a local service): the 1200 column at x 120-1320 */
   html[data-type="place"] { --gut: 120px; --container: 1200px; }

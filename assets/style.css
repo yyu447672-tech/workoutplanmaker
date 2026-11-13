@@ -36,8 +36,11 @@ legend { padding: 0; font-weight: 500; }
 .hero__proof { color: var(--p-muted); font-size: 14px; line-height: 1.5; }
 .hero__art { background-color: #eaf3f0; }
 .app-frame { background: #fff; border: 1px solid #dce5e2; border-radius: 12px; color: var(--p-ink); }
-.assessment-window { min-height: 580px; }
-.window-bar { display: flex; align-items: center; gap: 8px; padding: 18px 24px; border-bottom: 1px solid #e3eae7; font-size: 14px; padding-right: var(--ly-cut-room); }
+/* Polish 27: the hero window only ever shows question 1 (age); 580px was sized for a full quiz.
+   470px fits the teaser with room for an error line. The shadow lifts the window off the mint
+   panel so it reads as a window, not a second copy of the plain quiz frame below (decision 3=A). */
+.assessment-window { min-height: 470px; box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 18px 40px -18px rgb(0 0 0 / .32); }
+.window-bar { display: flex; align-items: center; gap: 8px; padding: 18px 24px; border-bottom: 1px solid #e3eae7; font-size: 14px; padding-right: var(--ly-cut-room); background: #f2f7f4; border-radius: 12px 12px 0 0; }   /* Polish 27: tinted bar, part of the window-vs-quiz distinction (decision 3=A) */
 .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--p-accent); }
 .window-count { margin-left: auto; white-space: nowrap; color: var(--p-muted); font-variant-numeric: tabular-nums; }
 .window-content { padding: 32px; padding-right: calc(var(--ly-cut-room) + 24px); }
@@ -61,9 +64,12 @@ legend { padding: 0; font-weight: 500; }
 .preview-heading { font-size: 16px; line-height: 1.4; margin: 0 0 16px; letter-spacing: -.2px; }
 .preview-line { display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 7px 0; }
 .preview-line > span:first-child { color: var(--p-accent); }
-.result-preview .loop-pause { width: 44px; height: 44px; }
+/* Polish 27: pin the pause button inside the card's 52px reserved bottom band (8px up, 16px in
+   from the right edge) instead of straddling the card's corner; the 44px disc now spans 8-52px
+   from the bottom edge, exactly the reserved zone. */
+.result-preview .loop-pause { width: 44px; height: 44px; right: 16px; bottom: 8px; }
 .section-lead { max-width: 60ch; margin-top: 24px; font-size: var(--t-lead); line-height: 1.6; color: var(--p-muted); }
-#how-it-works .steps { display: flex; list-style: none; padding: 0; margin-top: 96px; gap: 40px; }
+#how-it-works .steps { display: flex; list-style: none; padding: 0; margin-top: 48px; gap: 40px; }   /* Polish 27: was 96px */
 .steps li { flex: 1; display: flex; gap: 20px; padding-top: 24px; border-top: 2px solid #cbdad4; }
 .step-index { color: var(--p-accent); font-size: 32px; line-height: 1; flex: 0 0 24px; font-variant-numeric: tabular-nums; }
 .steps h3 { font-size: 22px; letter-spacing: -.6px; margin: 0 0 18px; }
@@ -95,7 +101,7 @@ progress::-webkit-progress-value { background: var(--p-accent); }
 #your-plan { height: auto; min-height: 100svh; }
 #your-plan > .wrap { height: auto; }
 .result-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
-.results-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; margin-top: 40px; }
+.results-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; margin-top: 40px; align-items: start; }   /* Polish 27: cards hug their own content instead of stretching to the row's tallest card */
 .result-module { padding: 28px; background: var(--p-surface); border-radius: 12px; min-width: 0; }
 .result-module h3 { font-size: 24px; margin: 0 0 24px; }
 .result-module p { font-size: 15px; line-height: 1.65; }
@@ -139,12 +145,12 @@ th, td { text-align: right; padding: 12px 8px; border-bottom: 1px solid #d5dfdb;
 th:first-child { text-align: left; }
 thead th { font-weight: 500; }
 .disclaimer { font-size: 14px; color: var(--p-muted); line-height: 1.6; margin-top: 32px; }
-.example-result { margin-top: 56px; padding: 40px; }
+.example-result { margin-top: 32px; padding: 40px; }   /* Polish 27: was margin-top 56px */
 .example-numbers { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 32px; }
 .example-numbers > div { display: flex; flex-direction: column; gap: 12px; }
 .example-numbers strong { font-size: var(--t-stat); font-weight: 500; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
 .example-numbers span { font-size: 15px; color: var(--p-muted); }
-.macro-entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 64px; align-items: center; }
+.macro-entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 32px; align-items: center; }   /* Polish 27: was gap 80px, margin-top 64px */
 .macro-mini { padding: 40px; }
 .macro-mini strong { font-size: var(--t-stat); font-weight: 500; letter-spacing: -1px; }
 .macro-mini p { margin-top: 16px; line-height: 1.6; }
@@ -163,7 +169,7 @@ thead th { font-weight: 500; }
 .footer nav a { min-height: 44px; display: inline-flex; align-items: center; }
 .footer-note { grid-column: 1/-1; color: var(--p-inv-muted); }
 .back-link { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 20px; font-size: 14px; color: var(--p-accent); }
-main > .hero--compact { height: auto; min-height: 100svh; }
+main > .hero--compact { height: auto; min-height: 0; }   /* Polish 27: was min-height 100svh; a compact hero holds one heading and one lead, not a screenful */
 .hero--compact .hero__lead { max-width: 62ch; margin-top: 24px; }
 .hero--compact h1 { font-size: clamp(40px,4.4vw,64px); }
 .calculator-layout { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 32px; margin-top: 40px; align-items: start; }
@@ -290,3 +296,31 @@ main > .hero--compact { height: auto; min-height: 100svh; }
 .section-lead, .question-help, .steps p, .faq-list p { color: var(--p-ink); }
 .example-result .hint { color:var(--p-ink); }
 .faq-action { margin-top:24px; }
+
+/* ---------------------------------------------------------------- Polish 27 (2026-11-13)
+   Spacing: the kit's "one section per screen" rhythm (system.css: main sections are exactly
+   100svh with 120px top + 72px bottom padding) leaves 200-400px of empty ground under this
+   site's short sections. --section (system.css) does NOT drive these sections -- main sections
+   take --padt/--padb -- so the token change alone would change nothing visible here; the real
+   fix is the override below, which the spec's §3 permits ("个别区块的 padding 覆盖"). */
+main > section.section:not(.hero) { height: auto; min-height: 0; padding-top: 64px; padding-bottom: 48px; }   /* (0,2,2): beats the kit's (0,2,1) tablet/phone min-height rules too, so sections are content-height at every width; no .fill element exists on this site to collapse */
+#assessment, #your-plan { min-height: 0; }   /* beats the ID rules above (100svh) */
+/* the macro formula section's text sat in a 1280px column with its right half empty: narrow it */
+#formula > .wrap { max-width: 880px; }
+/* light exposure line under the results (decision 2=B): a text link, not a second button.
+   Hidden for under-18 results exactly when the minor note shows (plan.js toggles
+   #purchase-minor's hidden attribute by age). */
+.plan-upsell { margin: 32px 0 0; text-align: center; font-size: 15px; line-height: 1.6; }
+.plan-upsell a { color: var(--p-accent); font-weight: 500; text-underline-offset: 3px; }
+#your-plan:has(#purchase-minor:not([hidden])) .plan-upsell { display: none; }
+@media (min-width: 1024px) {
+  /* collage hero: content height, not a forced screen. The art panel gets an explicit height
+     that fits its content (64px top inset + 470px window), so the absolute window is never cut;
+     the text column is centred against it by the layout.css change. */
+  main > section.hero--collage { height: auto; min-height: 0; padding-bottom: 48px; }
+  .hero--collage .hero__art { height: 560px; }
+  /* training template card: two columns on desktop so the full-width card stops being a
+     single narrow list with an empty right half */
+  .result-module:has(.training-days) .training-days { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+  .result-module:has(.training-days) .training-days details { break-inside: avoid; }
+}

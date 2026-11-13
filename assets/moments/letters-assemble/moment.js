@@ -41,7 +41,7 @@ export default function (root, opts, lib) {
       const e = lib.ease.quint(lib.clamp((t - k.at * 0.6) / 0.4));
       const u = 1 - e;
       c.style.transform = u < 0.002 ? '' : `translate(${(k.x * u).toFixed(3)}em, ${(k.y * u).toFixed(3)}em) rotate(${(k.r * u).toFixed(2)}deg)`;
-      c.style.opacity = u < 0.002 ? '' : (0.08 + 0.92 * e).toFixed(3);
+      c.style.opacity = u < 0.002 ? '' : e.toFixed(3);   /* Polish 27: was (0.08 + 0.92 * e); the 0.08 floor left the scattered heading visible as a faint ghost line at the viewport's bottom edge before it started assembling -- now letters are fully transparent until they move in */
     });
   }, { mode: 'view', margin: '30% 0px' });
   return { destroy() { s.destroy(); chars.forEach(c => { c.style.transform = ''; c.style.opacity = ''; }); root.classList.remove('is-live'); } };

@@ -123,7 +123,7 @@ main > .section .section-head { margin-bottom: var(--ly-head-gap); }
 .hero--split .hero__media { height: 100%; min-height: 0; }
 .hero--split .hero__grid { align-items: stretch; }
 .hero--split .hero__text { align-self: start; }
-.hero--collage .hero__text { align-self: start; }
+.hero--collage .hero__text { align-self: center; }   /* Polish 27: was start; the text column ended mid-panel with ~40% blank below it */
 /* the words' first line on the picture's top line: an h1 first in its column starts at its capitals */
 :is(.hero--split, .hero--collage) .hero__text > h1:first-child { text-box: trim-start cap alphabetic; }
 @media (max-width: 1023px) {
