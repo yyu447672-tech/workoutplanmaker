@@ -324,3 +324,10 @@ main > section.section:not(.hero) { height: auto; min-height: 0; padding-top: 64
   .result-module:has(.training-days) .training-days { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
   .result-module:has(.training-days) .training-days details { break-inside: avoid; }
 }
+
+@media (min-width: 1101px) {
+  /* Spec 29: the note card shows above 1100px, so the art must fit window + note stacked:
+     window 64px top inset + 470px min-height = bottom 534px; note ≈224px tall at bottom:32px;
+     830px puts the note top at 574px, 40px clear of the window (8px even in the pessimistic error-line case). */
+  .hero--collage .hero__art { height: 830px; }
+}
