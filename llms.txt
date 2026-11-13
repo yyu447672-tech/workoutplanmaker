@@ -16,3 +16,6 @@ Free browser-based adult workout templates and macro estimates. No account. Inpu
 
 - [1RM Calculator](https://workoutplanmaker.com/1rm-calculator.html): 1RM calculator: enter the weight you lifted and your reps to estimate your one-rep max with 7 formulas. Free, no sign-up.
 - [Body Fat Calculator](https://workoutplanmaker.com/body-fat-calculator.html): Body fat calculator: enter your height and waist to estimate body fat with the U.S. Navy method. Free, no sign-up.
+- [Free MyFitnessPal Alternative](https://workoutplanmaker.com/myfitnesspal-alternative.html): A free alternative to MyFitnessPal: calculate macros and build a 4-week plan in your browser. No account, no uploads — your numbers stay on your device.
+- [Macro Calculator vs TDEE Calculator](https://workoutplanmaker.com/macro-calculator-vs-tdee-calculator.html): TDEE sets your calorie budget; macros split it into protein, fat and carbs. Use the TDEE calculator first, then the macro calculator.
+- [Can You Trust a Free Calorie Calculator](https://workoutplanmaker.com/can-you-trust-a-free-calorie-calculator.html): Can you trust a free online calorie calculator? Check where your data goes, which formula it uses, and what it admits it cannot know.
